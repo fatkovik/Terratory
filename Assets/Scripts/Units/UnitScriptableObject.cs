@@ -2,16 +2,18 @@ using UnityEngine;
 
 namespace Units
 {
-    [CreateAssetMenu(fileName = "Unit", menuName = "UnitSO", order = 1)]
+    [CreateAssetMenu(fileName = "Unit", menuName = "ScriptableObjects/UnitSO")]
     public class UnitScriptableObject : ScriptableObject
     {
-        public int Price;
+        public float Price;
+        public float VisionRadius;
 
         public float HealthPoints;
         public float HealthRegenPerSecond;
 
         public float AttackRange;
-        public float DamagePerSecond;
+        public float Damage;
+        public float AttackSpeed;
 
         public float Speed;
 
