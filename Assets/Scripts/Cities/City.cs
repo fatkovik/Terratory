@@ -11,8 +11,10 @@ public class City : MonoBehaviour, IDamagable
 {
     UnitFactory unitFactory;
 
-    private Dictionary<UnitType, List<Unit>> units;
-    private float unitStrenght => this.units.Values.Sum(ul => ul.Sum(u => u.Strenght));
+    private Dictionary<UnitType, int> units;
+
+    //TODO: implement this
+    //private float unitStrenght => this.units.Values.Sum(ul => ul.Sum(u => u.Strenght));
 
     private float healthPoints;
     private float influenceRadius;
@@ -43,6 +45,29 @@ public class City : MonoBehaviour, IDamagable
     public void ChangeColor()
     {
         //TODO: implement
+    }
+
+    public void CitySelected()
+    {
+    }
+
+    public void AddUnits(UnitType unitToAdd)
+    {
+        this.units[unitToAdd]++;
+    }
+
+    public void CreateUnitObject(UnitType unitType)
+    {
+        if (this.units[unitType] < 1)
+        {
+            Debug.Log("No Units Left");
+            return;
+        }
+
+        this.units[unitType]--;
+        var newUnit = this.unitFactory.CreateUnit(unitType, this.transform.position);
+        newUnit.owner = OwnerType.Ally;
+        newUnit.Init();
     }
 
     public void Init(CityScriptableObject config)

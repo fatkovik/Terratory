@@ -12,13 +12,13 @@ namespace Currency
 
         public event Action<float> CurrencyAmountChanged;
 
-        public void Add(float amount)
+        public void AddAmount(float amount)
         {
             this.CurrencyAmount += amount;
             this.CurrencyAmountChanged?.Invoke(this.CurrencyAmount);
         }
 
-        public void Remove(float amount) 
+        public void RemoveAmount(float amount) 
         {
             this.CurrencyAmount -= amount;
             this.CurrencyAmountChanged?.Invoke(this.CurrencyAmount);

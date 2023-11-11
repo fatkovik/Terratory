@@ -36,7 +36,18 @@ namespace Scripts
 
         public void GiveDamage(IDamagable damageReciever, OwnerType owner, float amount)
         {
-            damageReciever.TakeDamage(owner, this.damage);
+            var reciever = damageReciever as Unit;
+
+            StartCoroutine(DamageGiveCoroutine());
+
+            IEnumerator DamageGiveCoroutine()
+            {
+                while (reciever.health > 0)
+                {
+                    reciever.TakeDamage(owner, this.damage);
+                    yield return new WaitForSeconds(attackSpeed);
+                }
+            }
         }
 
         public void TakeDamage(OwnerType owner, float amount)
@@ -63,13 +74,23 @@ namespace Scripts
             this.color = newColor;
         }
 
-        private void SetTarget()
+        private City cityToAttack;
+
+        public void Init()
         {
-            //set idamagable for attack
-            //overlap sphere and if enemy in the sphere give damage to that enemy;
+            //TODO: IMPLEMENT CITY TO ATTACK
+
+            this.cityToAttack = null;
+            if (this.cityToAttack == null)
+            {
+                throw new Exception(ExceptionMessages.NullException);
+            }
+
+            this.transform.position = Vector2.MoveTowards(this.transform.position, cityToAttack.transform.position, this.speed * Time.deltaTime);
+            this.transform.LookAt(cityToAttack.transform.position);
         }
 
-        public void Init(UnitScriptableObject config)
+        public void SetConfig(UnitScriptableObject config)
         {
             this.price = config.Price;
             this.visionRadius = config.VisionRadius;
@@ -86,6 +107,39 @@ namespace Scripts
             this.icon = config.Icon;
 
             this.type = config.Type;
+
+            var collider = this.gameObject.GetComponent<CircleCollider2D>();
+            collider.radius = this.visionRadius;
+        }
+
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+            if (collision.gameObject.CompareTag("Unit"))
+            {
+                var unit = collision.gameObject.GetComponent<Unit>();
+                if (unit.owner != this.owner)
+                {
+                    this.MoveAttackInSight(unit, this.owner, this.damage);
+                }
+            }
+        }
+
+        private void MoveAttackInSight(IDamagable damageReciever, OwnerType owner, float amount)
+        {
+            var target = damageReciever as Unit;
+
+            var distance = Vector2.Distance(this.transform.position, target.transform.position);
+
+            var attackRangeVector = new Vector3(this.attackRange, this.attackRange);
+
+            //move to unit in vision range
+            this.transform.position = Vector2.MoveTowards(this.transform.position, target.transform.position - attackRangeVector, this.speed * Time.deltaTime);
+            this.transform.LookAt(target.transform.position);
+
+            if (distance < attackRange)
+            {
+                this.GiveDamage(damageReciever, owner, amount);
+            }
         }
     }
 }

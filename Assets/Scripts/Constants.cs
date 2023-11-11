@@ -12,6 +12,7 @@ namespace Constants
     public static class ExceptionMessages
     {
         public const string UnitTypeNotSpecifiedError = "Unit type not specified";
+        public const string NullException = "Neccesary property is Null";
     }
 
     public enum UnitType
