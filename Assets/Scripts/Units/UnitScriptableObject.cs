@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Units
+namespace Constants
 {
     [CreateAssetMenu(fileName = "Unit", menuName = "ScriptableObjects/UnitSO")]
     public class UnitScriptableObject : ScriptableObject

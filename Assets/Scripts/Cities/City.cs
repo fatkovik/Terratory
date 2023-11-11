@@ -2,16 +2,17 @@
 using Scripts;
 using System;
 using System.Collections.Generic;
-using Units;
+using Constants;
 using UnityEngine;
 using System.Linq;
 using UnityEngine.UIElements;
 
 public class City : MonoBehaviour, IDamagable
 {
+    UnitFactory unitFactory;
+
     private Dictionary<UnitType, List<Unit>> units;
     private float unitStrenght => this.units.Values.Sum(ul => ul.Sum(u => u.Strenght));
-    //TODO; optimise
 
     private float healthPoints;
     private float influenceRadius;
@@ -54,4 +55,9 @@ public class City : MonoBehaviour, IDamagable
     }
 
     //TODO: implement and Update strenghtThreshold;
+
+    private void Awake()
+    {
+        this.unitFactory = FindObjectOfType<UnitFactory>();
+    }
 }

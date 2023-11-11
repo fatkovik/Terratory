@@ -2,11 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Units
+namespace Constants
 {
     public static class Constants
     {
         //Constants go here
+    }
+
+    public static class ExceptionMessages
+    {
+        public const string UnitTypeNotSpecifiedError = "Unit type not specified";
     }
 
     public enum UnitType

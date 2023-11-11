@@ -1,8 +1,7 @@
 ﻿using Cities;
 using System;
 using System.Collections;
-using Units;
-using Unity.VisualScripting;
+using Constants;
 using UnityEngine;
 
 namespace Scripts
