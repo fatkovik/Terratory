@@ -8,7 +8,6 @@ namespace Base.Input
      public class InputHandler : MonoBehaviour
     {
         [SerializeField] private PlayerInput _playerInput;
-        [SerializeField] private Transform _transform;
 
         private InputAction touchPositionAction;
         private InputAction tap;
@@ -27,8 +26,12 @@ namespace Base.Input
 
         private void Tap(InputAction.CallbackContext obj)
         {
-            Ray ray = Camera.main.ScreenPointToRay(touchPositionAction.ReadValue<Vector2>());
-            if(Physics.Raycast(ray,out RaycastHit hit))
+            Vector2 rayOrigin = Camera.main.ScreenToWorldPoint(touchPositionAction.ReadValue<Vector2>());
+            Vector2 rayDirection = Vector2.zero; // Set your ray direction here if needed
+
+            RaycastHit2D hit = Physics2D.Raycast(rayOrigin, rayDirection);
+
+            if (hit.collider != null)
             {
                 switch (obj.interaction)
                 {
@@ -44,18 +47,6 @@ namespace Base.Input
                         break;
                 }
             }
-
-            
-
-
-        }
-
-        private void TouchPosition(InputAction.CallbackContext obj)
-        {
-            var value = obj.ReadValue<Vector2>();
-            var a = Camera.main.ScreenToWorldPoint(value);
-            _transform.position = a;
-            Debug.Log(a);   
         }
 
         private void OnDisable()
