@@ -12,10 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1903b128468196a4fb3126f57938a899, type: 3}
   m_Name: Artillery
   m_EditorClassIdentifier: 
+  Price: 750
+  VisionRadius: 0
   HealthPoints: 0
   HealthRegenPerSecond: 0
   AttackRange: 0
-  DamagePerSecond: 0
+  Damage: 0
+  AttackSpeed: 0
   Speed: 0
   Icon: {fileID: 0}
   Type: 0

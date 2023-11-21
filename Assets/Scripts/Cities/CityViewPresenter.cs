@@ -6,9 +6,26 @@ using Constants;
 using UnityEngine;
 using System.Linq;
 using UnityEngine.UIElements;
+using Assets.Scripts.Cities;
+using Unity.Collections.LowLevel.Unsafe;
+using Base.Input;
+using Assets.Scripts.EventSO;
 
-public class City : MonoBehaviour, IDamagable
+public class CityViewPresenter : MonoBehaviour, IDamagable, ISelectable
 {
+    //events
+    [SerializeField]
+    private CitySelectedEventSO citySelectedEventSO;
+
+    //public event Action<UnitType, int> UnitAmountChanged;
+
+    [SerializeField]
+    private CityView cityView;
+
+    [SerializeField]
+    private OwnerType owner;
+    public OwnerType Owner => this.owner;
+
     UnitFactory unitFactory;
 
     private Dictionary<UnitType, int> units;
@@ -23,22 +40,23 @@ public class City : MonoBehaviour, IDamagable
     private float strengthThreshold;
     private float goldPerSecond;
 
-    private OwnerType owner;
-
     [SerializeField] 
     private Sprite areaSprite;
     private Color areaColor;
+
+    public bool HasHealth => this.healthPoints > 0;
 
     public event Action<OwnerType> OnOutOfHealth;
 
     public void TakeDamage(OwnerType owner, float amount)
     {
         this.healthPoints -= amount;
-
+        Debug.Log("city HIT!!");
         if (this.healthPoints <= 0)
         {
             this.owner = owner;
             OnOutOfHealth?.Invoke(this.owner);
+            Debug.Log("City Destroyed");
         }
     }
 
@@ -53,7 +71,16 @@ public class City : MonoBehaviour, IDamagable
 
     public void AddUnits(UnitType unitToAdd)
     {
+        if (!this.units.ContainsKey(unitToAdd))
+        {
+            this.units.Add(unitToAdd, 0);
+        }
+
         this.units[unitToAdd]++;
+
+        this.cityView.Initilize(unitToAdd, this.units[unitToAdd]);
+
+        CreateUnitObject(unitToAdd);
     }
 
     public void CreateUnitObject(UnitType unitType)
@@ -76,6 +103,7 @@ public class City : MonoBehaviour, IDamagable
         this.influenceRadius = config.InfluenceRadius;
         this.healthRegenPerSecond = config.HealthRegenPerSecond;
 
+        this.units = new Dictionary<UnitType, int>();
         //TODO: do the calculations;
     }
 
@@ -84,5 +112,10 @@ public class City : MonoBehaviour, IDamagable
     private void Awake()
     {
         this.unitFactory = FindObjectOfType<UnitFactory>();
+    }
+
+    public void Select()
+    {
+        this.citySelectedEventSO.Raise(this);
     }
 }

@@ -9,16 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1903b128468196a4fb3126f57938a899, type: 3}
-  m_Name: Tank
+  m_Script: {fileID: 11500000, guid: a1918a34f02b3894f91d68ef71a5d417, type: 3}
+  m_Name: CitySelectedEvent
   m_EditorClassIdentifier: 
-  Price: 1000
-  VisionRadius: 0
-  HealthPoints: 0
-  HealthRegenPerSecond: 0
-  AttackRange: 0
-  Damage: 0
-  AttackSpeed: 0
-  Speed: 0
-  Icon: {fileID: 0}
-  Type: 0

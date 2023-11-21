@@ -6,9 +6,9 @@ namespace Currency
     [CreateAssetMenu(fileName = "Currency", menuName = "ScriptableObjects/CurrencySO")]
     public class CurrencyScriptableObject : ScriptableObject
     {
-        public string CurrencyName { get; private set; }
+        [field: SerializeField] public string CurrencyName { get; private set; }
 
-        public float CurrencyAmount { get; private set; }
+        [field: SerializeField] public float CurrencyAmount { get; private set; }
 
         public event Action<float> CurrencyAmountChanged;
 
