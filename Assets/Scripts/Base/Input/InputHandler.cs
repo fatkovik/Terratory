@@ -27,7 +27,7 @@ namespace Base.Input
         private void Tap(InputAction.CallbackContext obj)
         {
             Vector2 rayOrigin = Camera.main.ScreenToWorldPoint(touchPositionAction.ReadValue<Vector2>());
-            Vector2 rayDirection = Vector2.zero; // Set your ray direction here if needed
+            Vector2 rayDirection = Vector2.zero;
 
             RaycastHit2D hit = Physics2D.Raycast(rayOrigin, rayDirection);
 
