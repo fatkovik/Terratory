@@ -2,20 +2,8 @@
 
 namespace Assets.Scripts.EventSO
 {
-    [CreateAssetMenu(fileName = "CitySetTargetEventSO", menuName = "ScriptableObjects/Events/CitySetTargetEventSO")]
-    public class CitySetTargetEventSO : BaseEventSO<AttackInfo>
+    [CreateAssetMenu(fileName = "CitySelectedEvent", menuName = "ScriptableObjects/Events/CitySelectedEvent")]
+    public class CitySelectedEventSO : BaseEventSO<CityViewPresenter>
     {
-    }
-
-    public struct AttackInfo
-    {
-        public readonly CityViewPresenter PlayerCity;
-        public readonly CityViewPresenter EnemyCity;
-
-        public AttackInfo(CityViewPresenter player, CityViewPresenter enemy)
-        {
-            PlayerCity = player;
-            EnemyCity = enemy;
-        }
     }
 }
