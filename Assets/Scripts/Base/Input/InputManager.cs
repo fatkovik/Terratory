@@ -29,7 +29,7 @@ namespace Base.Input
         private void ProcessCitySelection(ISelectable obj)
         {
             var selectedCity = obj as CityViewPresenter;
-            if (selectedCity) return;
+            if (selectedCity == null) return;
             
             if (selectedCity.Owner == OwnerType.Player)
             {

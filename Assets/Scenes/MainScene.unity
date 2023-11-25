@@ -139,8 +139,9 @@ GameObject:
   - component: {fileID: 382216812}
   - component: {fileID: 382216811}
   - component: {fileID: 382216810}
+  - component: {fileID: 382216813}
   m_Layer: 0
-  m_Name: InputHandler
+  m_Name: InputManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -205,6 +206,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &382216813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 382216809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d88d15ab11fb0464f8fb7e851ec0fc7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _inputHandler: {fileID: 382216810}
+  _citySelectedEvent: {fileID: 11400000, guid: cabd04b54566df14bac35d21c1dc8c7f, type: 2}
+  citySetTargetEvent: {fileID: 11400000, guid: 6e3714d0b19b38943be6d6eb8840686b, type: 2}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1045,7 +1061,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 2
 --- !u!1 &1496153354
 GameObject:
   m_ObjectHideFlags: 0
@@ -1719,6 +1735,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -500.4
       objectReference: {fileID: 0}
+    - target: {fileID: 5070451262774347709, guid: b6cb32210bfd9d94d87457b15f032f6f, type: 3}
+      propertyPath: m_Radius
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5393193077548662645, guid: b6cb32210bfd9d94d87457b15f032f6f, type: 3}
       propertyPath: m_Layer
       value: 4
@@ -1737,7 +1757,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 7e310bbce1565bc4c978c2cd88a867ea, type: 3}
     - target: {fileID: 7580395197912272009, guid: b6cb32210bfd9d94d87457b15f032f6f, type: 3}
       propertyPath: m_Color.b
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7580395197912272009, guid: b6cb32210bfd9d94d87457b15f032f6f, type: 3}
       propertyPath: m_Color.g
@@ -1745,7 +1765,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7580395197912272009, guid: b6cb32210bfd9d94d87457b15f032f6f, type: 3}
       propertyPath: m_Color.r
-      value: 1
+      value: 0.41210175
       objectReference: {fileID: 0}
     - target: {fileID: 7700313658937715728, guid: b6cb32210bfd9d94d87457b15f032f6f, type: 3}
       propertyPath: m_Layer
@@ -1830,6 +1850,10 @@ PrefabInstance:
     - target: {fileID: 7911475131552849349, guid: b6cb32210bfd9d94d87457b15f032f6f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7911475131552849349, guid: b6cb32210bfd9d94d87457b15f032f6f, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
