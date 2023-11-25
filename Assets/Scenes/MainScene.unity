@@ -155,6 +155,18 @@ PrefabInstance:
       propertyPath: owner
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2729632593437281616, guid: e7f32af568be7a8489f4a267e727deac, type: 3}
+      propertyPath: tankCount
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2729632593437281616, guid: e7f32af568be7a8489f4a267e727deac, type: 3}
+      propertyPath: infantryCount
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2729632593437281616, guid: e7f32af568be7a8489f4a267e727deac, type: 3}
+      propertyPath: artilleryCount
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3120019794679142366, guid: e7f32af568be7a8489f4a267e727deac, type: 3}
       propertyPath: m_Size.x
       value: 31.899677
@@ -183,6 +195,10 @@ PrefabInstance:
       propertyPath: m_WasSpriteAssigned
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3120019794679142366, guid: e7f32af568be7a8489f4a267e727deac, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 49b1cbb7715a5264ab6eb2917f52b8f2, type: 2}
     - target: {fileID: 7911475131552849349, guid: e7f32af568be7a8489f4a267e727deac, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -481,7 +497,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2014193404291398759, guid: e7f32af568be7a8489f4a267e727deac, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.7153492
+      value: 0.67
       objectReference: {fileID: 0}
     - target: {fileID: 2232326777991967790, guid: e7f32af568be7a8489f4a267e727deac, type: 3}
       propertyPath: m_Name
@@ -490,6 +506,18 @@ PrefabInstance:
     - target: {fileID: 2340090764285421721, guid: e7f32af568be7a8489f4a267e727deac, type: 3}
       propertyPath: owner
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2729632593437281616, guid: e7f32af568be7a8489f4a267e727deac, type: 3}
+      propertyPath: tankCount
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2729632593437281616, guid: e7f32af568be7a8489f4a267e727deac, type: 3}
+      propertyPath: infantryCount
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2729632593437281616, guid: e7f32af568be7a8489f4a267e727deac, type: 3}
+      propertyPath: artilleryCount
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 3120019794679142366, guid: e7f32af568be7a8489f4a267e727deac, type: 3}
       propertyPath: m_Size.x
@@ -519,6 +547,10 @@ PrefabInstance:
       propertyPath: m_WasSpriteAssigned
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3120019794679142366, guid: e7f32af568be7a8489f4a267e727deac, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 49b1cbb7715a5264ab6eb2917f52b8f2, type: 2}
     - target: {fileID: 7911475131552849349, guid: e7f32af568be7a8489f4a267e727deac, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -639,6 +671,18 @@ PrefabInstance:
       propertyPath: owner
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 2729632593437281616, guid: e7f32af568be7a8489f4a267e727deac, type: 3}
+      propertyPath: tankCount
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2729632593437281616, guid: e7f32af568be7a8489f4a267e727deac, type: 3}
+      propertyPath: infantryCount
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2729632593437281616, guid: e7f32af568be7a8489f4a267e727deac, type: 3}
+      propertyPath: artilleryCount
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3120019794679142366, guid: e7f32af568be7a8489f4a267e727deac, type: 3}
       propertyPath: m_Size.x
       value: 27.212423
@@ -667,6 +711,10 @@ PrefabInstance:
       propertyPath: m_WasSpriteAssigned
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3120019794679142366, guid: e7f32af568be7a8489f4a267e727deac, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 49b1cbb7715a5264ab6eb2917f52b8f2, type: 2}
     - target: {fileID: 7580395197912272009, guid: e7f32af568be7a8489f4a267e727deac, type: 3}
       propertyPath: m_Color.b
       value: 0
@@ -1141,6 +1189,10 @@ PrefabInstance:
       propertyPath: m_WasSpriteAssigned
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3120019794679142366, guid: e7f32af568be7a8489f4a267e727deac, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 49b1cbb7715a5264ab6eb2917f52b8f2, type: 2}
     - target: {fileID: 7911475131552849349, guid: e7f32af568be7a8489f4a267e727deac, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1207,7 +1259,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7911475131552849349, guid: e7f32af568be7a8489f4a267e727deac, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -17.412226
+      value: -17.33
       objectReference: {fileID: 0}
     - target: {fileID: 7911475131552849349, guid: e7f32af568be7a8489f4a267e727deac, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
