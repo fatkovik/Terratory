@@ -19,8 +19,11 @@ namespace Assets.Scripts.Cities
 
         [SerializeField]
         private TMP_Text artilleryCount;
+        
+        [SerializeField]
+        private TMP_Text currentHealth;
 
-        public void Initilize(UnitType type, int count)
+        public void SetUnitOverlay(UnitType type, int count)
         {
             switch (type)
             {
@@ -36,6 +39,11 @@ namespace Assets.Scripts.Cities
                 default:
                     break;
             }
+        }
+
+        public void SetHealthOverlay(int health)
+        {
+            this.currentHealth.SetText($"Health: {health}");   
         }
     }
 }

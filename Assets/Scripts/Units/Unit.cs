@@ -22,15 +22,13 @@ namespace Scripts
         private float attackRange;
 
         private float health;
+        private float currentHealth;
         private float healthRegenPerSecond;
 
         private float speed;
-
-        public OwnerType owner;
-
-        //Testing
         private Color color;
 
+        public OwnerType owner;
         public float Strenght { get; private set; }
 
         public bool HasHealth => this.health > 0;
@@ -83,7 +81,7 @@ namespace Scripts
             //TODO: IMPLEMENT CITY TO ATTACK
 
             var test = FindObjectsOfType<CityViewPresenter>();
-            this.cityToAttack = test.FirstOrDefault(c => c.Owner == OwnerType.Enemy);
+            this.cityToAttack = test.FirstOrDefault(c => c.Owner == OwnerType.EnemyOne);
 
             StartCoroutine(MoveToTarget(cityToAttack.transform.position));
         }
@@ -92,6 +90,12 @@ namespace Scripts
         {
             while (true)
             {
+                var distance = Vector2.Distance(this.transform.position, target);
+                if (distance <= this.attackRange)
+                {
+                    break;
+                }
+
                 Debug.Log("Moving to target");
                 this.transform.position = Vector2.MoveTowards(this.transform.position, target, this.speed * Time.deltaTime);
                 yield return null;
@@ -109,29 +113,29 @@ namespace Scripts
         {
             if (collision.gameObject.CompareTag("City"))
             {
-                StopCoroutine(MoveToTarget(collision.gameObject.transform.position));
-
                 var city = collision.gameObject.GetComponent<CityViewPresenter>();
                 if (city.Owner != this.owner)
                 {
-                    this.AttackTarget(city, this.owner, this.damage);
+                    while (city.HasHealth)
+                    {
+                        this.AttackTarget(city, this.owner, this.damage);
+                    }
                 }
             }
             
             if (collision.gameObject.CompareTag("Unit"))
             {
-                StopCoroutine(MoveToTarget(collision.gameObject.transform.position));
-
                 var unit = collision.gameObject.GetComponent<Unit>();
                 if (unit.owner != this.owner)
                 {
-                    this.AttackTarget(unit, this.owner, this.damage);
+                    while (unit.HasHealth)
+                    {
+                        this.AttackTarget(unit, this.owner, this.damage);
+                    }
                 }
             }
         }
 
-        //OnVisionRangeEnter\
-        //should be on trigger enter
         private void OnTriggerEnter(UnityEngine.Collider collision)
         {
             if (collision.gameObject.CompareTag("Unit"))
@@ -155,6 +159,7 @@ namespace Scripts
             this.visionRadius = config.VisionRadius;
 
             this.health = config.HealthPoints;
+            this.currentHealth = config.HealthPoints;
             this.healthRegenPerSecond = config.HealthRegenPerSecond;
 
             this.damage = config.Damage;

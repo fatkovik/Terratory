@@ -15,53 +15,50 @@ namespace Assets.Scripts.Views.Shop
 {
     public class ShopControllerScript : MonoBehaviour
     {
+        [SerializeField] private Button shopButtonPrefab;
+
         [SerializeField] private CitySelectedEventSO citySelectedEventSO;
+        [SerializeField] private HorizontalLayoutGroup shopButtonsLayout;
 
-        [SerializeField] private Button infantryBuyButton;
-        [SerializeField] private Button artilleryBuyButton;
-        [SerializeField] private Button tankBuyButton;
+        [SerializeField] private CurrencyScriptableObject currency;
 
-        [SerializeField]
-        private CurrencyScriptableObject currency;
-
-        [SerializeField]
-        private UnitDBSO unitDB;
+        [SerializeField] private UnitDBSO unitDB;
 
         private CityViewPresenter selectedCity;
 
         private void OnEnable()
         {
             citySelectedEventSO.EventRaised += CitySelectedEventHandler;
+
+            foreach (var unit in unitDB.UnitConfigs)
+            {
+                var button = Instantiate(shopButtonPrefab);
+                button.GetComponent<ShopButtonPrefabScript>().Init(unit.Key);
+                button.transform.SetParent(shopButtonsLayout.transform);
+                button.onClick.AddListener(() => BuyUnit(unit.Key));
+                button.image.sprite = unit.Value.Icon;
+            }
         }
 
-        private void Awake()
-        {
-            infantryBuyButton.onClick.AddListener(() => BuyUnit(UnitType.Infantry));
-            artilleryBuyButton.onClick.AddListener(() => BuyUnit(UnitType.Artillery));
-            tankBuyButton.onClick.AddListener(() => BuyUnit(UnitType.Tank));
-        }
-
-        public void Start()
-        {
-            //FOR TESTING PURPOSES
-            //selectedCity = GameObject.FindGameObjectsWithTag("City").FirstOrDefault(c => c.name == "City").GetComponent<CityViewPresenter>();
-        }
         private void CitySelectedEventHandler(CityViewPresenter selectedCity)
         {
-            Debug.Log($"Selected City: {selectedCity.name}");
+            if (selectedCity.Owner != OwnerType.Player)
+            {
+                return;
+            }
+
+            Debug.Log($"Selected City: {selectedCity.name} \n Owner: {selectedCity.Owner}");
             this.selectedCity = selectedCity;
         }
 
         public void BuyUnit(UnitType chosenUnit)
         {
-            if (currency.CurrencyAmount < unitDB.UnitConfigs[chosenUnit].Price)
+            if (currency.CurrencyAmount < unitDB.UnitConfigs[chosenUnit].Price || this.selectedCity == null)
             {
-                Debug.Log("Not enough money");
                 return;
             }
 
-            currency.RemoveAmount(unitDB.UnitConfigs[chosenUnit].Price);
-
+            this.currency.RemoveAmount(unitDB.UnitConfigs[chosenUnit].Price);
             this.selectedCity.AddUnits(chosenUnit);
         }
     }

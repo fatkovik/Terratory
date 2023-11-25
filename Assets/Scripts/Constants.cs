@@ -25,7 +25,9 @@ namespace Constants
     public enum OwnerType
     {
         Neutral = 0,
-        Enemy = 1,
-        Ally = 2,
+        EnemyOne = 1,
+        EnemyTwo = 2,
+        EnemyThree = 3,
+        Player = 4,
     }
 }

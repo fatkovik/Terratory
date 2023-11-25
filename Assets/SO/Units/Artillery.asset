@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: Artillery
   m_EditorClassIdentifier: 
   Price: 750
-  VisionRadius: 0
-  HealthPoints: 0
-  HealthRegenPerSecond: 0
-  AttackRange: 0
-  Damage: 0
-  AttackSpeed: 0
-  Speed: 0
-  Icon: {fileID: 0}
-  Type: 0
+  VisionRadius: 100
+  HealthPoints: 100
+  HealthRegenPerSecond: 2
+  AttackRange: 100
+  Damage: 10
+  AttackSpeed: 1
+  Speed: 1
+  Icon: {fileID: 21300000, guid: 42abab758c2f32644bf5a7dcc0c485b0, type: 3}
+  Type: 3
