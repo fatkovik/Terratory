@@ -8,25 +8,32 @@ namespace Base.Input
      public class InputHandler : MonoBehaviour
     {
         [SerializeField] private PlayerInput _playerInput;
+        [SerializeField] private LineRenderer _lineRenderer;
 
         private InputAction touchPositionAction;
-        private InputAction tap;
+        private InputAction touch;
+        private InputAction delta;
+
+        public Action<ISelectable> ObjectSelected;
 
         private void Awake()
         {
             touchPositionAction = _playerInput.actions.FindAction("TouchPosition");
-            tap = _playerInput.actions.FindAction("Tap");
+            touch = _playerInput.actions.FindAction("Touch");
+           // delta = _playerInput.actions.FindAction("Drag");
             
         }
 
         private void OnEnable()
         {
-            tap.performed += Tap;
+            touch.performed += TouchHandler;
         }
 
-        private void Tap(InputAction.CallbackContext obj)
+        private void TouchHandler(InputAction.CallbackContext obj)
         {
-            Vector2 rayOrigin = Camera.main.ScreenToWorldPoint(touchPositionAction.ReadValue<Vector2>());
+            Vector3 pos = touchPositionAction.ReadValue<Vector2>();
+            pos.z = Camera.main.nearClipPlane;
+            Vector2 rayOrigin = Camera.main.ScreenToWorldPoint(pos);
             Vector2 rayDirection = Vector2.zero;
 
             RaycastHit2D hit = Physics2D.Raycast(rayOrigin, rayDirection);
@@ -37,8 +44,9 @@ namespace Base.Input
                 {
                     case TapInteraction:
                         Debug.Log("Tap");
-                        if (hit.collider.TryGetComponent<ISelectable>(out ISelectable selectable))
+                        if (hit.collider.TryGetComponent(out ISelectable selectable))
                         {
+                            ObjectSelected?.Invoke(selectable);
                             selectable.Select();
                         }
                         break;
@@ -51,7 +59,7 @@ namespace Base.Input
 
         private void OnDisable()
         {
-            tap.performed -= Tap;
+            touch.performed -= TouchHandler;
         }
     }
 }

@@ -3,6 +3,7 @@ using Assets.Scripts.Player;
 using Cities;
 using Constants;
 using Scripts;
+using System;
 using System.Collections.Generic;
 using System.IO.IsolatedStorage;
 using UnityEngine;
@@ -10,6 +11,7 @@ using UnityEngine;
 public class LevelControllerScript : MonoBehaviour
 { 
     [SerializeField] private CityCapturedEventSO cityCapturedEventSO;
+    [SerializeField] private CitySetTargetEventSO citySetTargetEventSO;
 
     [SerializeField] private List<CityViewPresenter> CityList;
 
@@ -19,6 +21,7 @@ public class LevelControllerScript : MonoBehaviour
     private void OnEnable()
     {
         cityCapturedEventSO.EventRaised += OnCityCaptured;
+        citySetTargetEventSO.EventRaised += OnCityTargetSet;
     }
 
     private void Start()
@@ -45,4 +48,9 @@ public class LevelControllerScript : MonoBehaviour
         city.SetColor(color);
     }
 
+
+    private void OnCityTargetSet(AttackInfo data)
+    {
+        throw new NotImplementedException();
+    }
 }

@@ -42,11 +42,6 @@ namespace Assets.Scripts.Views.Shop
 
         private void CitySelectedEventHandler(CityViewPresenter selectedCity)
         {
-            if (selectedCity.Owner != OwnerType.Player)
-            {
-                return;
-            }
-
             Debug.Log($"Selected City: {selectedCity.name} \n Owner: {selectedCity.Owner}");
             this.selectedCity = selectedCity;
         }

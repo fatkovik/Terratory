@@ -18,7 +18,6 @@ public class CityViewPresenter : MonoBehaviour, IDamagable, ISelectable
     //events
     //public event Action<UnitType, int> UnitAmountChanged;
 
-    [SerializeField] private CitySelectedEventSO citySelectedEvent;
     [SerializeField] private CityCapturedEventSO cityCapturedEvent;
 
     [SerializeField] private CityView cityView;
@@ -141,6 +140,6 @@ public class CityViewPresenter : MonoBehaviour, IDamagable, ISelectable
 
     public void Select()
     {
-        this.citySelectedEvent.Raise(this);
+        Debug.Log("City selected");
     }
 }
