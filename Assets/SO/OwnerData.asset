@@ -16,7 +16,11 @@ MonoBehaviour:
     _serializedList:
     - Key: 4
       Value:
-        Color: {r: 1, g: 0.33490568, b: 0.33490568, a: 1}
+        CityColor: {r: 1, g: 0.4764151, b: 0.4764151, a: 1}
+        RegionColor: {r: 1, g: 0.6933962, b: 0.6933962, a: 1}
+        UnitColor: {r: 1, g: 0.18396229, b: 0.18396229, a: 1}
     - Key: 1
       Value:
-        Color: {r: 0.20392156, g: 0.4502188, b: 1, a: 1}
+        CityColor: {r: 0.4198113, g: 0.44661036, b: 1, a: 1}
+        RegionColor: {r: 0.6273585, g: 0.64256835, b: 1, a: 1}
+        UnitColor: {r: 0.61294794, g: 0.2028302, b: 1, a: 1}

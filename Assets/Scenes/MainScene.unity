@@ -159,6 +159,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerInput: {fileID: 382216811}
+  _lineRenderer: {fileID: 0}
 --- !u!114 &382216811
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -730,6 +731,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityCapturedEventSO: {fileID: 11400000, guid: 9ea61fa5bfcdf144ea1d505429369255, type: 2}
+  citySetTargetEventSO: {fileID: 11400000, guid: 6e3714d0b19b38943be6d6eb8840686b, type: 2}
   CityList: []
   cityScriptableObject: {fileID: 11400000, guid: 2ffe755ddcce11140b568e0148e3bddd, type: 2}
   ownerDataScriptableObject: {fileID: 11400000, guid: b7c95016fe5c7614380270209c111f4d, type: 2}
@@ -932,10 +934,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9522dcdab0a8d143ba5d9f690f062df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  citySelectedEvent: {fileID: 11400000, guid: cabd04b54566df14bac35d21c1dc8c7f, type: 2}
   cityCapturedEvent: {fileID: 11400000, guid: 9ea61fa5bfcdf144ea1d505429369255, type: 2}
   cityView: {fileID: 1437582964}
-  areaSprite: {fileID: 0}
+  areaSprite: {fileID: 672122542}
   owner: 1
 --- !u!212 &1437582966
 SpriteRenderer:
@@ -1675,13 +1676,17 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2340090764285421721, guid: b6cb32210bfd9d94d87457b15f032f6f, type: 3}
+      propertyPath: areaSprite
+      value: 
+      objectReference: {fileID: 553065279}
+    - target: {fileID: 2340090764285421721, guid: b6cb32210bfd9d94d87457b15f032f6f, type: 3}
       propertyPath: cityCapturedEvent
       value: 
       objectReference: {fileID: 11400000, guid: 9ea61fa5bfcdf144ea1d505429369255, type: 2}
     - target: {fileID: 2340090764285421721, guid: b6cb32210bfd9d94d87457b15f032f6f, type: 3}
       propertyPath: citySelectedEvent
       value: 
-      objectReference: {fileID: 11400000, guid: cabd04b54566df14bac35d21c1dc8c7f, type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 2340090764285421721, guid: b6cb32210bfd9d94d87457b15f032f6f, type: 3}
       propertyPath: cityCapturedEventSO
       value: 
@@ -1689,7 +1694,7 @@ PrefabInstance:
     - target: {fileID: 2340090764285421721, guid: b6cb32210bfd9d94d87457b15f032f6f, type: 3}
       propertyPath: citySelectedEventSO
       value: 
-      objectReference: {fileID: 11400000, guid: cabd04b54566df14bac35d21c1dc8c7f, type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 2496098625668286561, guid: b6cb32210bfd9d94d87457b15f032f6f, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -400
