@@ -16,11 +16,21 @@ MonoBehaviour:
     _serializedList:
     - Key: 4
       Value:
-        CityColor: {r: 1, g: 0.4764151, b: 0.4764151, a: 1}
-        RegionColor: {r: 1, g: 0.6933962, b: 0.6933962, a: 1}
+        CityColor: {r: 0.7372549, g: 0.23137255, b: 0.3764706, a: 1}
+        RegionColor: {r: 0.96862745, g: 0.38039216, b: 0.52156866, a: 1}
         UnitColor: {r: 1, g: 0.18396229, b: 0.18396229, a: 1}
     - Key: 1
       Value:
-        CityColor: {r: 0.4198113, g: 0.44661036, b: 1, a: 1}
-        RegionColor: {r: 0.6273585, g: 0.64256835, b: 1, a: 1}
-        UnitColor: {r: 0.61294794, g: 0.2028302, b: 1, a: 1}
+        CityColor: {r: 0.827451, g: 0.5019608, b: 0.03529412, a: 1}
+        RegionColor: {r: 1, g: 0.6156863, b: 0, a: 1}
+        UnitColor: {r: 0.4339623, g: 0.4339623, b: 0.4339623, a: 1}
+    - Key: 2
+      Value:
+        CityColor: {r: 0.09019608, g: 0.3764706, b: 0.35686275, a: 1}
+        RegionColor: {r: 0.1882353, g: 0.54901963, b: 0.53333336, a: 1}
+        UnitColor: {r: 0.509434, g: 0.509434, b: 0.509434, a: 1}
+    - Key: 3
+      Value:
+        CityColor: {r: 0.34117648, g: 0.4745098, b: 0.70980394, a: 1}
+        RegionColor: {r: 0.48235294, g: 0.64256835, b: 1, a: 1}
+        UnitColor: {r: 0.5471698, g: 0.5471698, b: 0.5471698, a: 1}
