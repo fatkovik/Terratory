@@ -11,6 +11,10 @@ namespace Assets.Scripts.Owners
     public struct OwnerData
     {
         //skins and all the data goes here
-        public Color Color;
+        public Color CityColor;
+
+        public Color RegionColor;
+
+        public Color UnitColor;
     }
 }

@@ -21,7 +21,7 @@ public class CityViewPresenter : MonoBehaviour, IDamagable, ISelectable
     [SerializeField] private CityCapturedEventSO cityCapturedEvent;
 
     [SerializeField] private CityView cityView;
-    [SerializeField] private Sprite areaSprite;
+    [SerializeField] private GameObject areaSprite;
     [SerializeField] private OwnerType owner;
 
     private float healthPoints;
@@ -41,9 +41,6 @@ public class CityViewPresenter : MonoBehaviour, IDamagable, ISelectable
 
     private Dictionary<UnitType, int> units;
 
-    //TODO: implement this
-    //private float unitStrenght => this.units.Values.Sum(ul => ul.Sum(u => u.Strenght));
-
     private float influenceRadius;
 
     private float maxHealthPoints;
@@ -52,9 +49,10 @@ public class CityViewPresenter : MonoBehaviour, IDamagable, ISelectable
     private float strengthThreshold;
     private float goldPerSecond;
 
-    private Color areaColor;
-
     public bool HasHealth => this.HealthPoints > 0;
+
+    //TODO: implement this
+    //private float unitStrenght => this.units.Values.Sum(ul => ul.Sum(u => u.Strenght));
 
     public void TakeDamage(OwnerType owner, float amount)
     {
@@ -74,6 +72,11 @@ public class CityViewPresenter : MonoBehaviour, IDamagable, ISelectable
         this.GetComponent<SpriteRenderer>().color = color;
     }
 
+    public void SetRegionColor(Color color)
+    {
+        this.areaSprite.GetComponent<SpriteRenderer>().color = color;
+    }
+
     public void CitySelected()
     {
     }
@@ -88,8 +91,6 @@ public class CityViewPresenter : MonoBehaviour, IDamagable, ISelectable
         this.units[unitToAdd]++;
 
         this.cityView.SetUnitOverlay(unitToAdd, this.units[unitToAdd]);
-
-        CreateUnitObject(unitToAdd);
     }
 
     public void CreateUnitObject(UnitType unitType)
@@ -101,8 +102,7 @@ public class CityViewPresenter : MonoBehaviour, IDamagable, ISelectable
         }
 
         this.units[unitType]--;
-        var newUnit = this.unitFactory.CreateUnit(unitType, this.transform.position);
-        newUnit.owner = OwnerType.Player;
+        var newUnit = this.unitFactory.CreateUnit(unitType, this.owner, this.transform.position);
         newUnit.Init();
     }
 

@@ -12,6 +12,8 @@ namespace Scripts
         [SerializeField] private Sprite icon;
         [SerializeField] private GameObject attackRangeColliderObject;
 
+        private Color color;
+
         private UnitType type;
 
         private float price;
@@ -26,7 +28,6 @@ namespace Scripts
         private float healthRegenPerSecond;
 
         private float speed;
-        private Color color;
 
         public OwnerType owner;
         public float Strenght { get; private set; }
@@ -69,9 +70,9 @@ namespace Scripts
             }
         }
 
-        private void SetColor(Color newColor)
+        public void SetColor(Color newColor)
         {
-            this.color = newColor;
+            this.gameObject.GetComponent<SpriteRenderer>().color = newColor;
         }
 
         private CityViewPresenter cityToAttack;
@@ -116,10 +117,7 @@ namespace Scripts
                 var city = collision.gameObject.GetComponent<CityViewPresenter>();
                 if (city.Owner != this.owner)
                 {
-                    while (city.HasHealth)
-                    {
-                        this.AttackTarget(city, this.owner, this.damage);
-                    }
+                    this.AttackTarget(city, this.owner, this.damage);
                 }
             }
             
@@ -128,10 +126,7 @@ namespace Scripts
                 var unit = collision.gameObject.GetComponent<Unit>();
                 if (unit.owner != this.owner)
                 {
-                    while (unit.HasHealth)
-                    {
-                        this.AttackTarget(unit, this.owner, this.damage);
-                    }
+                    this.AttackTarget(unit, this.owner, this.damage);
                 }
             }
         }
@@ -150,7 +145,17 @@ namespace Scripts
 
         private void AttackTarget(IDamagable damageReciever, OwnerType owner, float damage)
         {
-            damageReciever.TakeDamage(owner, damage);
+            StartCoroutine(attackCoroutine());
+
+            IEnumerator attackCoroutine()
+            {
+                while (damageReciever.HasHealth)
+                {
+                    damageReciever.TakeDamage(owner, damage);
+                    Debug.Log($"Damage given: {damage}, To {owner}");
+                    yield return new WaitForSeconds(attackSpeed);
+                }
+            }
         }
 
         public void SetConfig(UnitScriptableObject config)

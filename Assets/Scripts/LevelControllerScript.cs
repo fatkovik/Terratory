@@ -1,5 +1,7 @@
 using Assets.Scripts.EventSO;
+using Assets.Scripts.Owners;
 using Assets.Scripts.Player;
+using AYellowpaper.SerializedCollections;
 using Cities;
 using Constants;
 using Scripts;
@@ -33,24 +35,23 @@ public class LevelControllerScript : MonoBehaviour
             cityScript.Init(cityScriptableObject);
             CityList.Add(cityScript);
 
-            SetCityColor(cityScript, ownerDataScriptableObject.OwnerDataDictionary[cityScript.Owner].Color);
+            SetCityColor(cityScript, ownerDataScriptableObject.OwnerDataDictionary);
         }
     }
 
     private void OnCityCaptured(CityCapturedEventArgs args)
     {
         Debug.Log("City Captured");
-        SetCityColor(args.CapturedCity, ownerDataScriptableObject.OwnerDataDictionary[args.CapturedCity.Owner].Color);
+        SetCityColor(args.CapturedCity, ownerDataScriptableObject.OwnerDataDictionary);
     }
 
-    private void SetCityColor(CityViewPresenter city, Color color)
+    private void SetCityColor(CityViewPresenter city, SerializedDictionary<OwnerType, OwnerData> OwnerDataDictionary)
     {
-        city.SetColor(color);
+        city.SetColor(OwnerDataDictionary[city.Owner].CityColor);
+        city.SetRegionColor(OwnerDataDictionary[city.Owner].RegionColor);
     }
-
 
     private void OnCityTargetSet(AttackInfo data)
     {
-        throw new NotImplementedException();
     }
 }
