@@ -7,6 +7,7 @@ namespace Base.Input
 {
      public class InputHandler : MonoBehaviour
     {
+        [SerializeField] private LayerMask _layerMask;
         [SerializeField] private PlayerInput _playerInput;
         [SerializeField] private LineRenderer _lineRenderer;
 
@@ -36,7 +37,7 @@ namespace Base.Input
             Vector2 rayOrigin = Camera.main.ScreenToWorldPoint(pos);
             Vector2 rayDirection = Vector2.zero;
 
-            RaycastHit2D hit = Physics2D.Raycast(rayOrigin, rayDirection);
+            RaycastHit2D hit = Physics2D.Raycast(rayOrigin, rayDirection,Mathf.Infinity,_layerMask);
 
             if (hit.collider != null)
             {
@@ -44,6 +45,7 @@ namespace Base.Input
                 {
                     case TapInteraction:
                         Debug.Log("Tap");
+                        Debug.Log("----"+   hit.collider.name);
                         if (hit.collider.TryGetComponent(out ISelectable selectable))
                         {
                             ObjectSelected?.Invoke(selectable);

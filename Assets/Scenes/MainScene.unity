@@ -159,6 +159,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f520089d46ecf94d848008d2139a9d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _layerMask:
+    serializedVersion: 2
+    m_Bits: 128
   _playerInput: {fileID: 382216811}
   _lineRenderer: {fileID: 0}
 --- !u!114 &382216811
@@ -323,7 +326,7 @@ GameObject:
   m_Component:
   - component: {fileID: 553065280}
   - component: {fileID: 553065281}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TestLevelAllyRegion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -407,7 +410,7 @@ GameObject:
   m_Component:
   - component: {fileID: 672122543}
   - component: {fileID: 672122544}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TestLevelEnemyRegion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -812,7 +815,7 @@ GameObject:
   - component: {fileID: 1205248250}
   - component: {fileID: 1205248249}
   - component: {fileID: 1205248248}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: CityUICanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -915,7 +918,7 @@ GameObject:
   - component: {fileID: 1437582965}
   - component: {fileID: 1437582964}
   - component: {fileID: 1437582968}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: EnemyCity
   m_TagString: City
   m_Icon: {fileID: 0}
@@ -1073,7 +1076,7 @@ GameObject:
   - component: {fileID: 1496153355}
   - component: {fileID: 1496153357}
   - component: {fileID: 1496153356}
-  m_Layer: 4
+  m_Layer: 7
   m_Name: Health
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1375,7 +1378,7 @@ GameObject:
   - component: {fileID: 1883986543}
   - component: {fileID: 1883986545}
   - component: {fileID: 1883986544}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: HealthEN
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1673,11 +1676,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 649401655232085472, guid: b6cb32210bfd9d94d87457b15f032f6f, type: 3}
       propertyPath: m_Layer
-      value: 4
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1705925129139442221, guid: b6cb32210bfd9d94d87457b15f032f6f, type: 3}
       propertyPath: m_Layer
-      value: 4
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 2232326777991967790, guid: b6cb32210bfd9d94d87457b15f032f6f, type: 3}
       propertyPath: m_Name
@@ -1685,7 +1688,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2232326777991967790, guid: b6cb32210bfd9d94d87457b15f032f6f, type: 3}
       propertyPath: m_Layer
-      value: 4
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 2340090764285421721, guid: b6cb32210bfd9d94d87457b15f032f6f, type: 3}
       propertyPath: owner
@@ -1741,7 +1744,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5393193077548662645, guid: b6cb32210bfd9d94d87457b15f032f6f, type: 3}
       propertyPath: m_Layer
-      value: 4
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5907356770265582712, guid: b6cb32210bfd9d94d87457b15f032f6f, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -1769,7 +1772,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7700313658937715728, guid: b6cb32210bfd9d94d87457b15f032f6f, type: 3}
       propertyPath: m_Layer
-      value: 4
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 7911475131552849349, guid: b6cb32210bfd9d94d87457b15f032f6f, type: 3}
       propertyPath: m_Pivot.x

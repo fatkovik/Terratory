@@ -106,10 +106,10 @@ public class CityViewPresenter : MonoBehaviour, IDamagable, ISelectable
 
     public void SetTarget(CityViewPresenter target)
     {
-        for (int i = 0; i < this.units[UnitType.Infantry]; i++)
-        {
+        //for (int i = 0; i < this.units[UnitType.Infantry]; i++)
+       // {
             CreateUnitObject(UnitType.Infantry, target.transform.position);
-        }
+       // }
     }
 
     public void Init(CityScriptableObject config)

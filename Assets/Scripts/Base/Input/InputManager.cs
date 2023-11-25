@@ -38,7 +38,6 @@ namespace Base.Input
             }
             else if(_selectedAllyCity != null)
             {
-                Debug.Log("AAAAAA");
                 citySetTargetEvent.Raise(new AttackInfo(_selectedAllyCity, selectedCity));
             }
         }
