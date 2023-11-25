@@ -16,7 +16,7 @@ MonoBehaviour:
   VisionRadius: 100
   HealthPoints: 100
   HealthRegenPerSecond: 2
-  AttackRange: 2
+  AttackRange: 1
   Damage: 5
   AttackSpeed: 1
   Speed: 5

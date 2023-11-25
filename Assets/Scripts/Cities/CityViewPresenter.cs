@@ -77,10 +77,6 @@ public class CityViewPresenter : MonoBehaviour, IDamagable, ISelectable
         this.areaSprite.GetComponent<SpriteRenderer>().color = color;
     }
 
-    public void CitySelected()
-    {
-    }
-
     public void AddUnits(UnitType unitToAdd)
     {
         if (!this.units.ContainsKey(unitToAdd))
@@ -93,7 +89,7 @@ public class CityViewPresenter : MonoBehaviour, IDamagable, ISelectable
         this.cityView.SetUnitOverlay(unitToAdd, this.units[unitToAdd]);
     }
 
-    public void CreateUnitObject(UnitType unitType)
+    public void CreateUnitObject(UnitType unitType, Vector2 target)
     {
         if (this.units[unitType] < 1)
         {
@@ -102,8 +98,18 @@ public class CityViewPresenter : MonoBehaviour, IDamagable, ISelectable
         }
 
         this.units[unitType]--;
+        this.cityView.SetUnitOverlay(unitType, this.units[unitType]);
+
         var newUnit = this.unitFactory.CreateUnit(unitType, this.owner, this.transform.position);
-        newUnit.Init();
+        newUnit.Init(target);
+    }
+
+    public void SetTarget(CityViewPresenter target)
+    {
+        for (int i = 0; i < this.units[UnitType.Infantry]; i++)
+        {
+            CreateUnitObject(UnitType.Infantry, target.transform.position);
+        }
     }
 
     public void Init(CityScriptableObject config)

@@ -54,5 +54,6 @@ public class LevelControllerScript : MonoBehaviour
     private void OnCityTargetSet(AttackInfo data)
     {
         Debug.Log("Enemy city selected");
+        data.PlayerCity.SetTarget(data.EnemyCity);
     }
 }

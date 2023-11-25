@@ -75,16 +75,9 @@ namespace Scripts
             this.gameObject.GetComponent<SpriteRenderer>().color = newColor;
         }
 
-        private CityViewPresenter cityToAttack;
-
-        public void Init()
+        public void Init(Vector2 target)
         {
-            //TODO: IMPLEMENT CITY TO ATTACK
-
-            var test = FindObjectsOfType<CityViewPresenter>();
-            this.cityToAttack = test.FirstOrDefault(c => c.Owner == OwnerType.EnemyOne);
-
-            StartCoroutine(MoveToTarget(cityToAttack.transform.position));
+            StartCoroutine(MoveToTarget(target));
         }
 
         private IEnumerator MoveToTarget(Vector2 target)
