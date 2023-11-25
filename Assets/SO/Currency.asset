@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Currency
   m_EditorClassIdentifier: 
   <CurrencyName>k__BackingField: TollarLmao
-  <CurrencyAmount>k__BackingField: 100000
+  <CurrencyAmount>k__BackingField: 500000

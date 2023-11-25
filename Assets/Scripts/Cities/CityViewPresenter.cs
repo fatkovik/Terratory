@@ -12,6 +12,7 @@ using Base.Input;
 using Assets.Scripts.EventSO;
 using System.Collections;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Assets.Scripts;
 
 public class CityViewPresenter : MonoBehaviour, IDamagable, ISelectable
 {
@@ -101,15 +102,13 @@ public class CityViewPresenter : MonoBehaviour, IDamagable, ISelectable
         this.cityView.SetUnitOverlay(unitType, this.units[unitType]);
 
         var newUnit = this.unitFactory.CreateUnit(unitType, this.owner, this.transform.position);
+        newUnit.transform.position += Helpers.RandomVector(-0.5f, 0.5f);
         newUnit.Init(target);
     }
 
     public void SetTarget(CityViewPresenter target)
     {
-        //for (int i = 0; i < this.units[UnitType.Infantry]; i++)
-       // {
-            CreateUnitObject(UnitType.Infantry, target.transform.position);
-       // }
+        CreateUnitObject(UnitType.Infantry, target.transform.position);
     }
 
     public void Init(CityScriptableObject config)
