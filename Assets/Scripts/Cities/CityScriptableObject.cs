@@ -3,7 +3,7 @@
 namespace Cities
 {
     [CreateAssetMenu(fileName = "City", menuName = "ScriptableObjects/CitySO")]
-    public class CityScriptableObject : ScriptableObject
+    public class CitySO : ScriptableObject
     {
         public float BaseHealthPoints;
         public float HealthRegenPerSecond;

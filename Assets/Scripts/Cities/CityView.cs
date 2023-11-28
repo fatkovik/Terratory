@@ -11,18 +11,12 @@ namespace Assets.Scripts.Cities
 {
     public class CityView : MonoBehaviour
     {
-        [SerializeField]
-        private TMP_Text infantryCount;
+        [SerializeField] private TMP_Text infantryCount;
+        [SerializeField] private TMP_Text tankCount;
+        [SerializeField] private TMP_Text artilleryCount;
+        [SerializeField] private TMP_Text currentHealth;
 
-        [SerializeField]
-        private TMP_Text tankCount;
-
-        [SerializeField]
-        private TMP_Text artilleryCount;
-        
-        [SerializeField]
-        private TMP_Text currentHealth;
-
+        //TODO: change after testing... if it must be preserved use dictionary 
         public void SetUnitOverlay(UnitType type, int count)
         {
             switch (type)

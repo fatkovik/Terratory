@@ -4,25 +4,23 @@ using System;
 using System.Collections.Generic;
 using Constants;
 using UnityEngine;
-using System.Linq;
-using UnityEngine.UIElements;
 using Assets.Scripts.Cities;
-using Unity.Collections.LowLevel.Unsafe;
 using Base.Input;
 using Assets.Scripts.EventSO;
 using System.Collections;
-using System.Runtime.InteropServices.WindowsRuntime;
 using Assets.Scripts;
+using Assets.Scripts.Owners;
 
 public class CityViewPresenter : MonoBehaviour, IDamagable, ISelectable
 {
     //events
-    //public event Action<UnitType, int> UnitAmountChanged;
+    public event Action<UnitType, int> UnitAmountChanged;
 
     [SerializeField] private CityCapturedEventSO cityCapturedEvent;
 
     [SerializeField] private CityView cityView;
-    [SerializeField] private GameObject areaSprite;
+    [SerializeField] private SpriteRenderer cityPinRenderer;
+    [SerializeField] private SpriteRenderer regionRenderer;
     [SerializeField] private OwnerType owner;
 
     private float healthPoints;
@@ -55,6 +53,16 @@ public class CityViewPresenter : MonoBehaviour, IDamagable, ISelectable
     //TODO: implement this
     //private float unitStrenght => this.units.Values.Sum(ul => ul.Sum(u => u.Strenght));
 
+    private void OnEnable()
+    {
+        UnitAmountChanged += this.cityView.SetUnitOverlay;
+    }
+
+    private void OnDisable()
+    {
+        UnitAmountChanged -= this.cityView.SetUnitOverlay;
+    }
+
     public void TakeDamage(OwnerType owner, float amount)
     {
         this.HealthPoints -= amount;
@@ -68,14 +76,10 @@ public class CityViewPresenter : MonoBehaviour, IDamagable, ISelectable
         }
     }
 
-    public void SetColor(Color color)
+    public void SetColor(OwnerData data)
     {
-        this.GetComponent<SpriteRenderer>().color = color;
-    }
-
-    public void SetRegionColor(Color color)
-    {
-        this.areaSprite.GetComponent<SpriteRenderer>().color = color;
+        this.GetComponent<SpriteRenderer>().color = data.CityColor;
+        this.regionRenderer.color = data.RegionColor;
     }
 
     public void AddUnits(UnitType unitToAdd)
@@ -87,10 +91,10 @@ public class CityViewPresenter : MonoBehaviour, IDamagable, ISelectable
 
         this.units[unitToAdd]++;
 
-        this.cityView.SetUnitOverlay(unitToAdd, this.units[unitToAdd]);
+        UnitAmountChanged?.Invoke(unitToAdd, this.units[unitToAdd]);
     }
 
-    public void CreateUnitObject(UnitType unitType, Vector2 target)
+    public void CreateUnitAndInit(UnitType unitType, Vector2 target)
     {
         if (this.units[unitType] < 1)
         {
@@ -99,7 +103,7 @@ public class CityViewPresenter : MonoBehaviour, IDamagable, ISelectable
         }
 
         this.units[unitType]--;
-        this.cityView.SetUnitOverlay(unitType, this.units[unitType]);
+        UnitAmountChanged?.Invoke(unitType, this.units[unitType]);
 
         var newUnit = this.unitFactory.CreateUnit(unitType, this.owner, this.transform.position);
         newUnit.transform.position += Helpers.RandomVector(-0.5f, 0.5f);
@@ -108,10 +112,10 @@ public class CityViewPresenter : MonoBehaviour, IDamagable, ISelectable
 
     public void SetTarget(CityViewPresenter target)
     {
-        CreateUnitObject(UnitType.Infantry, target.transform.position);
+        CreateUnitAndInit(UnitType.Infantry, target.transform.position);
     }
 
-    public void Init(CityScriptableObject config)
+    public void Init(CitySO config)
     {
         this.HealthPoints = config.BaseHealthPoints;
         this.influenceRadius = config.InfluenceRadius;

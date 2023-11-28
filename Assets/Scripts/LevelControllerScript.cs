@@ -17,7 +17,7 @@ public class LevelControllerScript : MonoBehaviour
 
     [SerializeField] private List<CityViewPresenter> CityList;
 
-    [SerializeField] private CityScriptableObject cityScriptableObject;
+    [SerializeField] private CitySO cityScriptableObject;
     [SerializeField] private OwnerDataScriptableObject ownerDataScriptableObject;
 
     private void OnEnable()
@@ -47,8 +47,7 @@ public class LevelControllerScript : MonoBehaviour
 
     private void SetCityColor(CityViewPresenter city, SerializedDictionary<OwnerType, OwnerData> OwnerDataDictionary)
     {
-        city.SetColor(OwnerDataDictionary[city.Owner].CityColor);
-        city.SetRegionColor(OwnerDataDictionary[city.Owner].RegionColor);
+        city.SetColor(OwnerDataDictionary[city.Owner]);
     }
 
     private void OnCityTargetSet(AttackInfo data)
