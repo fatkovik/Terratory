@@ -3,12 +3,8 @@ using Assets.Scripts.Units;
 using AYellowpaper.SerializedCollections;
 using Constants;
 using Currency;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.InputSystem.Composites;
 using UnityEngine.UI;
 
 namespace Assets.Scripts.Views.Shop
@@ -16,12 +12,9 @@ namespace Assets.Scripts.Views.Shop
     public class ShopControllerScript : MonoBehaviour
     {
         [SerializeField] private Button shopButtonPrefab;
-
         [SerializeField] private CitySelectedEventSO citySelectedEventSO;
         [SerializeField] private HorizontalLayoutGroup shopButtonsLayout;
-
         [SerializeField] private CurrencyScriptableObject currency;
-
         [SerializeField] private UnitDBSO unitDB;
 
         private CityViewPresenter selectedCity;
@@ -33,7 +26,7 @@ namespace Assets.Scripts.Views.Shop
             foreach (var unit in unitDB.UnitConfigs)
             {
                 var button = Instantiate(shopButtonPrefab);
-                button.GetComponent<ShopButtonPrefabScript>().Init(unit.Key);
+                button.GetComponent<UnitButtonPrefabScript>().Init(unit.Key);
                 button.transform.SetParent(shopButtonsLayout.transform);
                 button.onClick.AddListener(() => BuyUnit(unit.Key));
                 button.image.sprite = unit.Value.Icon;

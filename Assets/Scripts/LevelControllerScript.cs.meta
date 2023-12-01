@@ -3,7 +3,11 @@ guid: 368c96b4770522740b10be0aaa7c128f
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - cityCapturedEventSO: {fileID: 11400000, guid: 9ea61fa5bfcdf144ea1d505429369255, type: 2}
+  - citySetTargetEventSO: {fileID: 11400000, guid: 6e3714d0b19b38943be6d6eb8840686b, type: 2}
+  - cityScriptableObject: {fileID: 11400000, guid: 2ffe755ddcce11140b568e0148e3bddd, type: 2}
+  - ownerDataScriptableObject: {fileID: 11400000, guid: b7c95016fe5c7614380270209c111f4d, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

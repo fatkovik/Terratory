@@ -2,7 +2,7 @@ using Assets.Scripts.Units;
 using Constants;
 using UnityEngine;
 
-public class ShopButtonPrefabScript : MonoBehaviour
+public class UnitButtonPrefabScript : MonoBehaviour
 {
     public UnitType UnitType { get; private set; }
 

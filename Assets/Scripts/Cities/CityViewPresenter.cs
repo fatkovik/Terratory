@@ -48,6 +48,8 @@ public class CityViewPresenter : MonoBehaviour, IDamagable, ISelectable
     private float strengthThreshold;
     private float goldPerSecond;
 
+    public UnitType UnitTypeToSpawn = UnitType.Infantry;
+
     public bool HasHealth => this.HealthPoints > 0;
 
     //TODO: implement this
@@ -94,7 +96,7 @@ public class CityViewPresenter : MonoBehaviour, IDamagable, ISelectable
         UnitAmountChanged?.Invoke(unitToAdd, this.units[unitToAdd]);
     }
 
-    public void CreateUnitAndInit(UnitType unitType, Vector2 target)
+    public void CreateUnitObject(UnitType unitType, CityViewPresenter target)
     {
         if (this.units[unitType] < 1)
         {
@@ -112,7 +114,7 @@ public class CityViewPresenter : MonoBehaviour, IDamagable, ISelectable
 
     public void SetTarget(CityViewPresenter target)
     {
-        CreateUnitAndInit(UnitType.Infantry, target.transform.position);
+        CreateUnitObject(this.UnitTypeToSpawn, target);
     }
 
     public void Init(CitySO config)

@@ -4,6 +4,7 @@ using System.Collections;
 using Constants;
 using UnityEngine;
 using System.Linq;
+using Assets.Scripts;
 
 namespace Scripts
 {
@@ -12,6 +13,7 @@ namespace Scripts
         [SerializeField] private Sprite icon;
         [SerializeField] private GameObject attackRangeColliderObject;
 
+        private CityViewPresenter targetCity;
         private Color color;
 
         private UnitType type;
@@ -70,16 +72,6 @@ namespace Scripts
             }
         }
 
-        public void SetColor(Color newColor)
-        {
-            this.gameObject.GetComponent<SpriteRenderer>().color = newColor;
-        }
-
-        public void Init(Vector2 target)
-        {
-            StartCoroutine(MoveToTarget(target));
-        }
-
         private IEnumerator MoveToTarget(Vector2 target)
         {
             while (true)
@@ -87,6 +79,7 @@ namespace Scripts
                 var distance = Vector2.Distance(this.transform.position, target);
                 if (distance <= this.attackRange)
                 {
+                    Debug.Log("Stopped Moving");
                     break;
                 }
 
@@ -96,10 +89,9 @@ namespace Scripts
             }
         }
 
-        private void MoveToTarget(IDamagable damageReciever)
+        private void MoveToTargetUnit(IDamagable damageReciever)
         {
             var target = damageReciever as Unit;
-
             StartCoroutine(MoveToTarget(target.transform.position));
         }
 
@@ -108,7 +100,7 @@ namespace Scripts
             if (collision.gameObject.CompareTag("City"))
             {
                 var city = collision.gameObject.GetComponent<CityViewPresenter>();
-                if (city.Owner != this.owner)
+                if (city.Owner == targetCity.Owner)
                 {
                     this.AttackTarget(city, this.owner, this.damage);
                 }
@@ -131,14 +123,24 @@ namespace Scripts
                 var unit = collision.gameObject.GetComponent<Unit>();
                 if (unit.owner != this.owner)
                 {
-                    this.MoveToTarget(unit);
+                    this.MoveToTargetUnit(unit);
                 }
             }
         }
 
         private void AttackTarget(IDamagable damageReciever, OwnerType owner, float damage)
         {
-            StartCoroutine(attackCoroutine());
+            //stop moving when target in range
+            StopCoroutine(moveCoroutine);
+
+            TaskRoutine t = new TaskRoutine(attackCoroutine());
+            t.Finished += (bool attacking) =>
+            {
+                if (!attacking)
+                {
+                    moveCoroutine = StartCoroutine(MoveToTarget(targetCity.transform.position + Helpers.RandomVector(-2, 2)));
+                }
+            };
 
             IEnumerator attackCoroutine()
             {
@@ -149,6 +151,20 @@ namespace Scripts
                     yield return new WaitForSeconds(attackSpeed);
                 }
             }
+        }
+
+        public void SetColor(Color newColor)
+        {
+            this.gameObject.GetComponent<SpriteRenderer>().color = newColor;
+        }
+
+        Coroutine moveCoroutine;
+
+        public void Init(CityViewPresenter target)
+        {
+            var targetRandmizedPosition = target.transform.position + Helpers.RandomVector(-5, 5);
+            moveCoroutine = StartCoroutine(MoveToTarget(targetRandmizedPosition));
+            this.targetCity = target;
         }
 
         public void SetConfig(UnitScriptableObject config)
