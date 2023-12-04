@@ -80,6 +80,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2bc867482d8cd447b1208a1a60b105f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  collider: {fileID: 0}
 --- !u!1 &7109645819221871001
 GameObject:
   m_ObjectHideFlags: 0
@@ -129,7 +130,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icon: {fileID: 0}
-  attackRangeColliderObject: {fileID: 2944137170230526130}
+  spriteRenderer: {fileID: 9037457751198537877}
+  attackRangeColliderScript: {fileID: 1803833885590193847}
+  visionCollider: {fileID: 6696665182088536259}
   owner: 0
 --- !u!58 &6696665182088536259
 CircleCollider2D:

@@ -11,7 +11,9 @@ namespace Scripts
     public class Unit : MonoBehaviour, IDamager, IDamagable
     {
         [SerializeField] private Sprite icon;
-        [SerializeField] private GameObject attackRangeColliderObject;
+        [SerializeField] SpriteRenderer spriteRenderer;
+        [SerializeField] AttackRangeCollider attackRangeColliderScript;
+        [SerializeField] CircleCollider2D visionCollider;
 
         private CityViewPresenter targetCity;
         private Color color;
@@ -181,19 +183,12 @@ namespace Scripts
             this.attackRange = config.AttackRange;
 
             this.speed = config.Speed;
-
             this.icon = config.Icon;
-
             this.type = config.Type;
 
-            var collider = this.gameObject.GetComponent<CircleCollider2D>();
-            var spriteRenderer = this.gameObject.GetComponent<SpriteRenderer>();
-            var attackRangeColliderScript = this.attackRangeColliderObject.GetComponent<AttackRangeColliderScript>();
-            var attackRangeCollider = this.attackRangeColliderObject.GetComponent<CircleCollider2D>();
-
-            collider.radius = this.visionRadius;
+            visionCollider.radius = this.visionRadius;
             spriteRenderer.sprite = this.icon;
-            attackRangeCollider.radius = this.attackRange;
+            attackRangeColliderScript.Collider.radius = this.attackRange;
             attackRangeColliderScript.ColliderEnter += OnAttackRangeEnterColliderEnter;
         }
 

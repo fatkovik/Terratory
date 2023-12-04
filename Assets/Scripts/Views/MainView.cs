@@ -5,8 +5,7 @@ using UnityEngine;
 
 public class MainView : MonoBehaviour
 {
-    [SerializeField]
-    private TMP_Text currencyText;
+    [SerializeField] private TMP_Text currencyText;
 
     public void Initilize(string currencyAmount)
     {

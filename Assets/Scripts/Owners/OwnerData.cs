@@ -12,9 +12,7 @@ namespace Assets.Scripts.Owners
     {
         //skins and all the data goes here
         public Color CityColor;
-
         public Color RegionColor;
-
         public Color UnitColor;
     }
 }

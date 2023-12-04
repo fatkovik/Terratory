@@ -5,15 +5,18 @@ using UnityEngine;
 
 public class MainViewPresenter : MonoBehaviour
 {
-    [SerializeField]
-    private MainView mainView;
+    [SerializeField] private MainView mainView;
 
-    [SerializeField]
-    private CurrencyScriptableObject currencyScriptableObject;
+    [SerializeField] private CurrencyScriptableObject currencyScriptableObject;
 
     private void OnEnable()
     {
         currencyScriptableObject.CurrencyAmountChanged += CurrencyAmountChangedHandler;   
+    }
+
+    private void OnDisable()
+    {
+        currencyScriptableObject.CurrencyAmountChanged -= CurrencyAmountChangedHandler;
     }
 
     private void CurrencyAmountChangedHandler(float amount)

@@ -14,9 +14,7 @@ namespace Scripts
     public class UnitFactory : MonoBehaviour
     {
         [SerializeField] private Unit unitPrefab;
-
         [SerializeField] private UnitDBSO unitDB;
-
         [SerializeField] private OwnerDataScriptableObject ownerDataSO;
 
         public Unit CreateUnit(UnitType unitType, OwnerType owner, Vector3 position)

@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using System.IO.IsolatedStorage;
 using UnityEngine;
 
-public class LevelControllerScript : MonoBehaviour
+public class LevelController : MonoBehaviour
 { 
     [SerializeField] private CityCapturedEventSO cityCapturedEventSO;
     [SerializeField] private CitySetTargetEventSO citySetTargetEventSO;
@@ -24,6 +24,12 @@ public class LevelControllerScript : MonoBehaviour
     {
         cityCapturedEventSO.EventRaised += OnCityCaptured;
         citySetTargetEventSO.EventRaised += OnCityTargetSet;
+    }
+
+    private void OnDisable()
+    {
+        cityCapturedEventSO.EventRaised -= OnCityCaptured;
+        citySetTargetEventSO.EventRaised -= OnCityTargetSet;
     }
 
     private void Start()
