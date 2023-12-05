@@ -4,7 +4,7 @@ using Constants;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UnitSelectionPanelScript : MonoBehaviour
+public class UnitSelectionPanel : MonoBehaviour
 {
     [SerializeField] private UnitTypeButton unitButtonPrefab;
     [SerializeField] private UnitToSpawnSelectedEventSO unitToSpawnSelected;
@@ -20,8 +20,8 @@ public class UnitSelectionPanelScript : MonoBehaviour
 
         foreach (var unit in unitDB.UnitConfigs)
         {
-            var button = Instantiate(unitButtonPrefab);
-            button.GetComponent<UnitTypeButton>().Init(unit.Key, unit.Value.Icon, () => SetUnitToSpawn(unit.Key));
+            var button = Instantiate<UnitTypeButton>(unitButtonPrefab);
+            button.Init(unit.Key, unit.Value.Icon, () => SetUnitToSpawn(unit.Key));
             button.transform.SetParent(unitSelectionLayoutGroup.transform);
         }
     }
