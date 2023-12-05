@@ -1,15 +1,12 @@
 using Assets.Scripts.EventSO;
 using Assets.Scripts.Units;
 using Constants;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class UnitSelectionPanelScript : MonoBehaviour
 {
-    [SerializeField] private Button unitButtonPrefab;
+    [SerializeField] private ShopButton unitButtonPrefab;
     [SerializeField] private UnitToSpawnSelectedEventSO unitToSpawnSelected;
     [SerializeField] private CitySelectedEventSO citySelectedEventSO;
     [SerializeField] private UnitDBSO unitDB;
@@ -24,10 +21,8 @@ public class UnitSelectionPanelScript : MonoBehaviour
         foreach (var unit in unitDB.UnitConfigs)
         {
             var button = Instantiate(unitButtonPrefab);
-            button.GetComponent<UnitButtonPrefabScript>().Init(unit.Key);
+            button.GetComponent<ShopButton>().Init(unit.Key, unit.Value.Icon, () => SetUnitToSpawn(unit.Key));
             button.transform.SetParent(unitSelectionLayoutGroup.transform);
-            button.onClick.AddListener(() => SetUnitToSpawn(unit.Key));
-            button.image.sprite = unit.Value.Icon;
         }
     }
 

@@ -24,7 +24,6 @@ public class ShopButton : MonoBehaviour
 
     private void OnEnable()
     {
-        if (!wasInitialized) return;
         this.button.onClick.AddListener(onButtonClick);
     }
 

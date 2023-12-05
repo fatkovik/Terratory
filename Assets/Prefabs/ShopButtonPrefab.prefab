@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1432503812620243430}
   - component: {fileID: 1192910389282126175}
   m_Layer: 0
-  m_Name: UnitButtonPrefab
+  m_Name: ShopButtonPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -133,3 +133,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 144c764570c14b2429e04f47cd60f493, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  button: {fileID: 1432503812620243430}
