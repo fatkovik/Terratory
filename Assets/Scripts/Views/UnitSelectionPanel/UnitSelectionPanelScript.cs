@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class UnitSelectionPanelScript : MonoBehaviour
 {
-    [SerializeField] private ShopButton unitButtonPrefab;
+    [SerializeField] private UnitTypeButton unitButtonPrefab;
     [SerializeField] private UnitToSpawnSelectedEventSO unitToSpawnSelected;
     [SerializeField] private CitySelectedEventSO citySelectedEventSO;
     [SerializeField] private UnitDBSO unitDB;
@@ -21,13 +21,14 @@ public class UnitSelectionPanelScript : MonoBehaviour
         foreach (var unit in unitDB.UnitConfigs)
         {
             var button = Instantiate(unitButtonPrefab);
-            button.GetComponent<ShopButton>().Init(unit.Key, unit.Value.Icon, () => SetUnitToSpawn(unit.Key));
+            button.GetComponent<UnitTypeButton>().Init(unit.Key, unit.Value.Icon, () => SetUnitToSpawn(unit.Key));
             button.transform.SetParent(unitSelectionLayoutGroup.transform);
         }
     }
 
     private void SetUnitToSpawn(UnitType unit)
     {
+        if (selectedCity == null) return;
         selectedCity.UnitTypeToSpawn = unit;
     }
 

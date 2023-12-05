@@ -7,28 +7,31 @@ using UnityEngine.UI;
 using static UnityEngine.UI.Button;
 
 [RequireComponent(typeof(Button))]
-public class ShopButton : MonoBehaviour
+public class UnitTypeButton : MonoBehaviour
 {
     [SerializeField] private Button button;
     private UnityAction onButtonClick;
-    private bool wasInitialized;
+    
     public UnitType UnitType { get; private set; }
-    public ButtonClickedEvent OnClick => this.button.onClick;
-    public Image Image => this.button.image;
+    bool hasListener;
     public void Init(UnitType unitType, Sprite sprite, UnityAction onClick)
     {
         this.UnitType = unitType;
         this.button.image.sprite = sprite;
         this.onButtonClick = onClick;
+
+        this.button.onClick.AddListener(onButtonClick);
     }
 
     private void OnEnable()
     {
+        if (onButtonClick == null) return;
         this.button.onClick.AddListener(onButtonClick);
     }
 
     private void OnDisable()
     {
+        if(onButtonClick == null) return;
         this.button.onClick.RemoveListener(onButtonClick);
     }
 }

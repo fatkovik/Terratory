@@ -15,13 +15,10 @@ namespace Assets.Scripts.Views.Shop
 {
     public class ShopController : MonoBehaviour
     {
-        [SerializeField] private ShopButton shopButtonPrefab;
-
+        [SerializeField] private UnitTypeButton shopButtonPrefab;
         [SerializeField] private CitySelectedEventSO citySelectedEventSO;
         [SerializeField] private HorizontalLayoutGroup shopButtonsLayout;
-
         [SerializeField] private CurrencyScriptableObject currency;
-
         [SerializeField] private UnitDBSO unitDB;
 
         private CityViewPresenter selectedCity;
@@ -32,7 +29,7 @@ namespace Assets.Scripts.Views.Shop
 
             foreach (var unit in unitDB.UnitConfigs)
             {
-                ShopButton button = Instantiate(shopButtonPrefab);
+                UnitTypeButton button = Instantiate(shopButtonPrefab);
                 button.Init(unit.Key, unit.Value.Icon, () => BuyUnit(unit.Key));
                 button.transform.SetParent(shopButtonsLayout.transform);
             }
