@@ -39,7 +39,20 @@ public class CityViewPresenter : MonoBehaviour, IDamagable, ISelectable
         }
     }
 
-    public OwnerType Owner => this.owner;
+    public OwnerType Owner 
+    {
+        get => this.owner;
+        set
+        {
+            this.owner = value;
+
+            if (this.owner != OwnerType.Player)
+            {
+                this.cityView.ShowCountOverlay(false);
+            }
+            this.cityView.ShowCountOverlay(true);
+        }
+    }
 
     UnitFactory unitFactory;
 
@@ -160,6 +173,8 @@ public class CityViewPresenter : MonoBehaviour, IDamagable, ISelectable
 
         this.units = new Dictionary<UnitType, int>();
         this.RegenHealth();
+
+        this.cityView.ShowCountOverlay(this.Owner == OwnerType.Player);
         //TODO: do the calculations;
     }
 

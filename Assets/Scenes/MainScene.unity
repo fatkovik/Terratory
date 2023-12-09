@@ -240,6 +240,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2038254185541431764, guid: e7f32af568be7a8489f4a267e727deac, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2232326777991967790, guid: e7f32af568be7a8489f4a267e727deac, type: 3}
       propertyPath: m_Name
       value: EnemyCity
@@ -251,11 +255,11 @@ PrefabInstance:
     - target: {fileID: 2340090764285421721, guid: e7f32af568be7a8489f4a267e727deac, type: 3}
       propertyPath: regionRenderer
       value: 
-      objectReference: {fileID: 658894060}
+      objectReference: {fileID: 1931925148}
     - target: {fileID: 2340090764285421721, guid: e7f32af568be7a8489f4a267e727deac, type: 3}
       propertyPath: cityPinRenderer
       value: 
-      objectReference: {fileID: 1931925148}
+      objectReference: {fileID: 1139868619}
     - target: {fileID: 3120019794679142366, guid: e7f32af568be7a8489f4a267e727deac, type: 3}
       propertyPath: m_Size.x
       value: 31.899677
@@ -854,6 +858,11 @@ MonoBehaviour:
 --- !u!224 &1139868615 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7911475131552849349, guid: e7f32af568be7a8489f4a267e727deac, type: 3}
+  m_PrefabInstance: {fileID: 390926832}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &1139868619 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 7580395197912272009, guid: e7f32af568be7a8489f4a267e727deac, type: 3}
   m_PrefabInstance: {fileID: 390926832}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1185357715

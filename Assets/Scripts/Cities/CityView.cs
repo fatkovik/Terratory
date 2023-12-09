@@ -45,5 +45,25 @@ namespace Assets.Scripts.Cities
         {
             this.strength.SetText($"Strength: {strength}");
         }
+
+        /// <summary>
+        /// False = hide, True = show
+        /// </summary>
+        /// <param name="hide"></param>
+        public void ShowCountOverlay(bool hide)
+        {
+            if (this.infantryCount.gameObject.activeInHierarchy == hide && 
+                this.tankCount.gameObject.activeInHierarchy == hide && 
+                this.artilleryCount.gameObject.activeInHierarchy == hide &&
+                this.strength.gameObject.activeInHierarchy == hide)
+            {
+                return;
+            }
+
+            this.infantryCount.gameObject.SetActive(false);
+            this.tankCount.gameObject.SetActive(false);
+            this.artilleryCount.gameObject.SetActive(false);
+            this.strength.gameObject.SetActive(false);
+        }
     }
 }
