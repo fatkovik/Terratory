@@ -8,5 +8,6 @@ namespace Cities
         public float BaseHealthPoints;
         public float HealthRegenPerSecond;
         public float InfluenceRadius;
+        public float StrenghtThreshold;
     }
 }

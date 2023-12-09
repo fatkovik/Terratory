@@ -9,3 +9,13 @@ public abstract class BaseEventSO<T> : ScriptableObject
         EventRaised?.Invoke(value);
     }
 }
+
+public abstract class BaseEventSO : ScriptableObject
+{
+    public event System.Action EventRaised;
+
+    public virtual void Raise()
+    {
+        EventRaised?.Invoke();
+    }
+}

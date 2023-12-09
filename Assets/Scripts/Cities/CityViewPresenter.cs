@@ -10,6 +10,10 @@ using Assets.Scripts.EventSO;
 using System.Collections;
 using Assets.Scripts;
 using Assets.Scripts.Owners;
+using System.Runtime.InteropServices.WindowsRuntime;
+using System.Runtime.CompilerServices;
+using Unity.VisualScripting.Dependencies.NCalc;
+using Assets.Scripts.Units;
 
 public class CityViewPresenter : MonoBehaviour, IDamagable, ISelectable
 {
@@ -21,6 +25,7 @@ public class CityViewPresenter : MonoBehaviour, IDamagable, ISelectable
     [SerializeField] private CityView cityView;
     [SerializeField] private SpriteRenderer cityPinRenderer;
     [SerializeField] private SpriteRenderer regionRenderer;
+    [SerializeField] private UnitDBSO unitDB;
     [SerializeField] private OwnerType owner;
 
     private float healthPoints;
@@ -43,26 +48,55 @@ public class CityViewPresenter : MonoBehaviour, IDamagable, ISelectable
     private float influenceRadius;
 
     private float maxHealthPoints;
-    private float healthRegenPerSecond;
+    private float healthRegenPerSecond; 
 
-    private float strengthThreshold;
     private float goldPerSecond;
 
     public UnitType UnitTypeToSpawn = UnitType.Infantry;
 
     public bool HasHealth => this.HealthPoints > 0;
 
-    //TODO: implement this
-    //private float unitStrenght => this.units.Values.Sum(ul => ul.Sum(u => u.Strenght));
+    private float strengthThreshold;
+    private float strength;
+    public float Strength
+    {
+        get => strength;
+        private set 
+        {
+            this.strength = value;
+            this.cityView.SetStrengthOverlay(strength);
+
+            if (strength < strengthThreshold)
+            {
+                //call method from rebel shit when its ready;
+            }
+        }
+    }
 
     private void OnEnable()
     {
-        UnitAmountChanged += this.cityView.SetUnitOverlay;
+        UnitAmountChanged += OnUnitAmountChanged;
     }
 
     private void OnDisable()
     {
-        UnitAmountChanged -= this.cityView.SetUnitOverlay;
+        UnitAmountChanged -= OnUnitAmountChanged;
+    }
+
+    private void OnUnitAmountChanged(UnitType type, int arg2)
+    {
+        this.cityView.SetUnitOverlay(type, arg2);
+        this.Strength = CalculateStrength();
+    }
+
+    private float CalculateStrength()
+    {
+        float strength = 0;
+        foreach (var unitKey in units.Keys)
+        {
+            strength += units[unitKey] * unitDB.UnitConfigs[unitKey].Damage;
+        }
+        return strength;
     }
 
     public void TakeDamage(OwnerType owner, float amount)
@@ -122,6 +156,7 @@ public class CityViewPresenter : MonoBehaviour, IDamagable, ISelectable
         this.HealthPoints = config.BaseHealthPoints;
         this.influenceRadius = config.InfluenceRadius;
         this.healthRegenPerSecond = config.HealthRegenPerSecond;
+        this.strengthThreshold = config.StrenghtThreshold; // multiply by distance and influence shit
 
         this.units = new Dictionary<UnitType, int>();
         this.RegenHealth();
@@ -141,8 +176,6 @@ public class CityViewPresenter : MonoBehaviour, IDamagable, ISelectable
             yield return new WaitForSeconds(1);
         }
     }
-
-    //TODO: implement and Update strenghtThreshold;
 
     private void Awake()
     {
