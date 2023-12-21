@@ -6,7 +6,8 @@ namespace Constants
 {
     public static class Constants
     {
-        //Constants go here
+        public const float GoldStepInterval = 1f;
+        public const float GoldPerSecondDistanceModifier = 10f;
     }
 
     public static class ExceptionMessages

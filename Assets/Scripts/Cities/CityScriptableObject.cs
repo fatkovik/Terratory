@@ -9,5 +9,6 @@ namespace Cities
         public float HealthRegenPerSecond;
         public float InfluenceRadius;
         public float StrenghtThreshold;
+        public float BaseGoldPerSecond;
     }
 }

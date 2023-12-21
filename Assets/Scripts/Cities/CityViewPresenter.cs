@@ -3,6 +3,7 @@ using Scripts;
 using System;
 using System.Collections.Generic;
 using Constants;
+using static Constants.Constants;
 using UnityEngine;
 using Assets.Scripts.Cities;
 using Base.Input;
@@ -11,6 +12,7 @@ using System.Collections;
 using Assets.Scripts;
 using Assets.Scripts.Owners;
 using Assets.Scripts.Units;
+using System.Net.Mime;
 
 public class CityViewPresenter : MonoBehaviour, IDamagable, ISelectable
 {
@@ -24,6 +26,9 @@ public class CityViewPresenter : MonoBehaviour, IDamagable, ISelectable
     [SerializeField] private SpriteRenderer regionRenderer;
     [SerializeField] private UnitDBSO unitDB;
     [SerializeField] private OwnerType owner;
+    [SerializeField] private bool IsMainPlayerCity = false;
+
+    public bool IsCapital => this.IsMainPlayerCity && this.owner == OwnerType.Player;
 
     private float healthPoints;
     public float HealthPoints
@@ -51,16 +56,13 @@ public class CityViewPresenter : MonoBehaviour, IDamagable, ISelectable
         }
     }
 
-    UnitFactory unitFactory;
-
+    private UnitFactory unitFactory;
     private Dictionary<UnitType, int> units;
 
     private float influenceRadius;
 
     private float maxHealthPoints;
     private float healthRegenPerSecond; 
-
-    private float goldPerSecond;
 
     public UnitType UnitTypeToSpawn = UnitType.Infantry;
 
@@ -81,6 +83,14 @@ public class CityViewPresenter : MonoBehaviour, IDamagable, ISelectable
                 Rebel();
             }
         }
+    }
+
+    private float baseGoldPerSecond;
+    private float goldPerSecond;
+    public float GoldPerSecond
+    {
+        get => goldPerSecond;
+        private set { this.goldPerSecond = value; }
     }
 
     private void OnEnable()
@@ -112,7 +122,6 @@ public class CityViewPresenter : MonoBehaviour, IDamagable, ISelectable
     public void TakeDamage(OwnerType owner, float amount)
     {
         this.HealthPoints -= amount;
-        Debug.Log("city HIT!!");
         if (this.HealthPoints <= 0)
         {
             cityOwnerChangedEvent.Raise(new CityOwnerChangedEventArgs { CapturedCity = this, NewOwner = owner });
@@ -164,13 +173,28 @@ public class CityViewPresenter : MonoBehaviour, IDamagable, ISelectable
         this.HealthPoints = config.BaseHealthPoints;
         this.influenceRadius = config.InfluenceRadius;
         this.healthRegenPerSecond = config.HealthRegenPerSecond;
+        this.baseGoldPerSecond = config.BaseGoldPerSecond;
         this.strengthThreshold = config.StrenghtThreshold; // multiply by distance and influence shit
 
         this.units = new Dictionary<UnitType, int>();
         this.RegenHealth();
 
         this.cityView.ShowCountOverlay(this.Owner == OwnerType.Player);
-        //TODO: do the calculations;
+        //TODO: do the calculations
+
+        this.GoldPerSecond = this.baseGoldPerSecond;
+    }
+
+    public void CalculateAndSetGoldPerSecond(CityViewPresenter playerCapital)
+    {
+        var thisCityCoordinates = this.transform.position;
+        var originalPlayerCityCoordinated = playerCapital.transform.position;
+
+        var distance = Vector3.Distance(thisCityCoordinates, originalPlayerCityCoordinated);
+
+        var normalisedDistance = Mathf.Clamp01(distance);
+        this.GoldPerSecond = baseGoldPerSecond * (normalisedDistance * GoldPerSecondDistanceModifier);
+        Debug.Log(this.GoldPerSecond);
     }
 
     private void RegenHealth()
@@ -199,6 +223,5 @@ public class CityViewPresenter : MonoBehaviour, IDamagable, ISelectable
 
     public void Select()
     {
-        Debug.Log("City selected");
     }
 }
