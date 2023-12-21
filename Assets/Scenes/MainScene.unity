@@ -735,6 +735,7 @@ MonoBehaviour:
   CityList: []
   cityScriptableObject: {fileID: 11400000, guid: 2ffe755ddcce11140b568e0148e3bddd, type: 2}
   ownerDataScriptableObject: {fileID: 11400000, guid: b7c95016fe5c7614380270209c111f4d, type: 2}
+  currencyScriptableObject: {fileID: 11400000, guid: d758e0c789048cc45b1b4ed5f79f4153, type: 2}
 --- !u!1 &1084931430
 GameObject:
   m_ObjectHideFlags: 0
@@ -978,6 +979,10 @@ PrefabInstance:
       propertyPath: cityPinRenderer
       value: 
       objectReference: {fileID: 658894060}
+    - target: {fileID: 2340090764285421721, guid: e7f32af568be7a8489f4a267e727deac, type: 3}
+      propertyPath: IsMainPlayerCity
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3120019794679142366, guid: e7f32af568be7a8489f4a267e727deac, type: 3}
       propertyPath: m_Size.x
       value: 27.212423
