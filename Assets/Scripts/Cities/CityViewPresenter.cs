@@ -213,7 +213,7 @@ public class CityViewPresenter : MonoBehaviour, IDamagable, ISelectable
     
     private void Rebel()
     {
-        throw new NotImplementedException();
+        Debug.LogError("Rebel logic is not implemented");
     }
 
     private void Awake()
