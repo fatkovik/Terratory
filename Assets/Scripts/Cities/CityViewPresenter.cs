@@ -16,7 +16,6 @@ using System.Net.Mime;
 
 public class CityViewPresenter : MonoBehaviour, IDamagable, ISelectable
 {
-    //events
     public event Action<UnitType, int> UnitAmountChanged;
 
     [SerializeField] private CityCapturedEventSO cityCapturedEvent;
