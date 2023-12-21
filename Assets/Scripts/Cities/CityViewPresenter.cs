@@ -10,9 +10,6 @@ using Assets.Scripts.EventSO;
 using System.Collections;
 using Assets.Scripts;
 using Assets.Scripts.Owners;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Runtime.CompilerServices;
-using Unity.VisualScripting.Dependencies.NCalc;
 using Assets.Scripts.Units;
 
 public class CityViewPresenter : MonoBehaviour, IDamagable, ISelectable
@@ -20,7 +17,7 @@ public class CityViewPresenter : MonoBehaviour, IDamagable, ISelectable
     //events
     public event Action<UnitType, int> UnitAmountChanged;
 
-    [SerializeField] private CityCapturedEventSO cityCapturedEvent;
+    [SerializeField] private CityOwnerChangedEventSO cityOwnerChangedEvent;
 
     [SerializeField] private CityView cityView;
     [SerializeField] private SpriteRenderer cityPinRenderer;
@@ -81,7 +78,7 @@ public class CityViewPresenter : MonoBehaviour, IDamagable, ISelectable
 
             if (strength < strengthThreshold)
             {
-                //call method from rebel shit when its ready;
+                Rebel();
             }
         }
     }
@@ -118,9 +115,7 @@ public class CityViewPresenter : MonoBehaviour, IDamagable, ISelectable
         Debug.Log("city HIT!!");
         if (this.HealthPoints <= 0)
         {
-            var oldOwner = this.owner;
-            this.owner = owner;
-            cityCapturedEvent?.Raise(new CityCapturedEventArgs { CapturedCity = this, OldOwner = oldOwner });
+            cityOwnerChangedEvent.Raise(new CityOwnerChangedEventArgs { CapturedCity = this, NewOwner = owner });
             Debug.Log("City Destroyed");
         }
     }
@@ -190,6 +185,11 @@ public class CityViewPresenter : MonoBehaviour, IDamagable, ISelectable
             }
             yield return new WaitForSeconds(1);
         }
+    }
+    
+    private void Rebel()
+    {
+        throw new NotImplementedException();
     }
 
     private void Awake()

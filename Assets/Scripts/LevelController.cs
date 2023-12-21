@@ -4,15 +4,13 @@ using Assets.Scripts.Player;
 using AYellowpaper.SerializedCollections;
 using Cities;
 using Constants;
-using Scripts;
-using System;
 using System.Collections.Generic;
-using System.IO.IsolatedStorage;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class LevelController : MonoBehaviour
 { 
-    [SerializeField] private CityCapturedEventSO cityCapturedEventSO;
+    [SerializeField] private CityOwnerChangedEventSO cityOwnerChangedEventSo;
     [SerializeField] private CitySetTargetEventSO citySetTargetEventSO;
 
     [SerializeField] private List<CityViewPresenter> CityList;
@@ -22,13 +20,13 @@ public class LevelController : MonoBehaviour
 
     private void OnEnable()
     {
-        cityCapturedEventSO.EventRaised += OnCityCaptured;
+        cityOwnerChangedEventSo.EventRaised += OnCityOwnerChanged;
         citySetTargetEventSO.EventRaised += OnCityTargetSet;
     }
 
     private void OnDisable()
     {
-        cityCapturedEventSO.EventRaised -= OnCityCaptured;
+        cityOwnerChangedEventSo.EventRaised -= OnCityOwnerChanged;
         citySetTargetEventSO.EventRaised -= OnCityTargetSet;
     }
 
@@ -45,10 +43,10 @@ public class LevelController : MonoBehaviour
         }
     }
 
-    private void OnCityCaptured(CityCapturedEventArgs args)
+    private void OnCityOwnerChanged(CityOwnerChangedEventArgs args)
     {
         Debug.Log("City Captured");
-        SetCityColor(args.CapturedCity, ownerDataScriptableObject.OwnerDataDictionary);
+        OwnerChanged(args.CapturedCity, args.NewOwner);
     }
 
     private void SetCityColor(CityViewPresenter city, SerializedDictionary<OwnerType, OwnerData> OwnerDataDictionary)
@@ -60,5 +58,11 @@ public class LevelController : MonoBehaviour
     {
         Debug.Log("Enemy city selected");
         data.PlayerCity.SetTarget(data.EnemyCity);
+    }
+
+    private void OwnerChanged(CityViewPresenter city, OwnerType newOwner)
+    {
+        city.Owner = newOwner;
+        SetCityColor(city, ownerDataScriptableObject.OwnerDataDictionary);
     }
 }
