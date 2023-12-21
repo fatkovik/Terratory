@@ -18,7 +18,7 @@ public class CityViewPresenter : MonoBehaviour, IDamagable, ISelectable
 {
     public event Action<UnitType, int> UnitAmountChanged;
 
-    [SerializeField] private CityCapturedEventSO cityCapturedEvent;
+    [SerializeField] private CityOwnerChangedEventSO cityOwnerChangedEvent;
 
     [SerializeField] private CityView cityView;
     [SerializeField] private SpriteRenderer cityPinRenderer;
@@ -79,7 +79,7 @@ public class CityViewPresenter : MonoBehaviour, IDamagable, ISelectable
 
             if (strength < strengthThreshold)
             {
-                //call method from rebel shit when its ready;
+                Rebel();
             }
         }
     }
@@ -123,9 +123,8 @@ public class CityViewPresenter : MonoBehaviour, IDamagable, ISelectable
         this.HealthPoints -= amount;
         if (this.HealthPoints <= 0)
         {
-            var oldOwner = this.owner;
-            this.owner = owner;
-            cityCapturedEvent?.Raise(new CityCapturedEventArgs { CapturedCity = this, OldOwner = oldOwner });
+            cityOwnerChangedEvent.Raise(new CityOwnerChangedEventArgs { CapturedCity = this, NewOwner = owner });
+            Debug.Log("City Destroyed");
         }
     }
 
@@ -209,6 +208,11 @@ public class CityViewPresenter : MonoBehaviour, IDamagable, ISelectable
             }
             yield return new WaitForSeconds(1);
         }
+    }
+    
+    private void Rebel()
+    {
+        Debug.LogError("Rebel logic is not implemented");
     }
 
     private void Awake()

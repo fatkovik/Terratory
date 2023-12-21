@@ -1,6 +1,5 @@
-using Assets.Scripts;
+using System.Collections;
 using Assets.Scripts.EventSO;
-using Extensions;
 using Assets.Scripts.Owners;
 using Assets.Scripts.Player;
 using AYellowpaper.SerializedCollections;
@@ -8,21 +7,22 @@ using Cities;
 using Constants;
 using Currency;
 using System.Collections.Generic;
-using UnityEngine;
 using System.Linq;
-using System.Collections;
+using Extensions;
+using UnityEngine;
 
 public class LevelController : MonoBehaviour
 {
-    private List<CityViewPresenter> AllyCities;
+    [SerializeField] private CityOwnerChangedEventSO cityOwnerChangedEventSo;
 
-    [SerializeField] private CityCapturedEventSO cityCapturedEventSO;
+    [SerializeField] private CityOwnerChangedEventSO cityOwnerChangedEventSO;
     [SerializeField] private CitySetTargetEventSO citySetTargetEventSO;
 
     [SerializeField] private List<CityViewPresenter> CityList;
 
     [SerializeField] private CitySO cityScriptableObject;
     [SerializeField] private OwnerDataScriptableObject ownerDataScriptableObject;
+    private List<CityViewPresenter> AllyCities;
 
     [SerializeField] private CurrencyScriptableObject currencyScriptableObject;
 
@@ -32,13 +32,13 @@ public class LevelController : MonoBehaviour
 
     private void OnEnable()
     {
-        cityCapturedEventSO.EventRaised += OnCityCaptured;
+        cityOwnerChangedEventSo.EventRaised += OnCityOwnerChanged;
         citySetTargetEventSO.EventRaised += OnCityTargetSet;
     }
 
     private void OnDisable()
     {
-        cityCapturedEventSO.EventRaised -= OnCityCaptured;
+        cityOwnerChangedEventSo.EventRaised -= OnCityOwnerChanged;
         citySetTargetEventSO.EventRaised -= OnCityTargetSet;
     }
 
@@ -61,9 +61,10 @@ public class LevelController : MonoBehaviour
         SetGoldPerSecond();
     }
 
-    private void OnCityCaptured(CityCapturedEventArgs args)
+    private void OnCityOwnerChanged(CityOwnerChangedEventArgs args)
     {
         Debug.Log("City Captured");
+        OwnerChanged(args.CapturedCity, args.NewOwner);
         SetCityColor(args.CapturedCity, ownerDataScriptableObject.OwnerDataDictionary);
 
         var isAdded = this.AllyCities.TryAddIfNotContains(args.CapturedCity);
@@ -73,8 +74,11 @@ public class LevelController : MonoBehaviour
             args.CapturedCity.CalculateAndSetGoldPerSecond(playerCapitalCity);
             this.totalGoldPerSecond += args.CapturedCity.GoldPerSecond;
         }
+    }
 
-        //SetGoldPerSecond();
+    private void SetCityColor(CityViewPresenter city, SerializedDictionary<OwnerType, OwnerData> OwnerDataDictionary)
+    {
+        city.SetColor(OwnerDataDictionary[city.Owner]);
     }
 
     //set flag to terminate coroutine when city is lost;
@@ -92,15 +96,16 @@ public class LevelController : MonoBehaviour
             }
         }
     }
-
-    private void SetCityColor(CityViewPresenter city, SerializedDictionary<OwnerType, OwnerData> OwnerDataDictionary)
+    private void OwnerChanged(CityViewPresenter city, OwnerType newOwner)
     {
-        city.SetColor(OwnerDataDictionary[city.Owner]);
+        city.Owner = newOwner;
+        SetCityColor(city, ownerDataScriptableObject.OwnerDataDictionary);
     }
-
+    
     private void OnCityTargetSet(AttackInfo data)
     {
         Debug.Log("Enemy city selected");
         data.PlayerCity.SetTarget(data.EnemyCity);
     }
 }
+
