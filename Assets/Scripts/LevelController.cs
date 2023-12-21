@@ -8,13 +8,14 @@ using Constants;
 using Currency;
 using System.Collections.Generic;
 using System.Linq;
+using Extensions;
 using UnityEngine;
 
 public class LevelController : MonoBehaviour
-{ 
+{
     [SerializeField] private CityOwnerChangedEventSO cityOwnerChangedEventSo;
 
-    [SerializeField] private CityCapturedEventSO cityCapturedEventSO;
+    [SerializeField] private CityOwnerChangedEventSO cityOwnerChangedEventSO;
     [SerializeField] private CitySetTargetEventSO citySetTargetEventSO;
 
     [SerializeField] private List<CityViewPresenter> CityList;
@@ -75,6 +76,11 @@ public class LevelController : MonoBehaviour
         }
     }
 
+    private void SetCityColor(CityViewPresenter city, SerializedDictionary<OwnerType, OwnerData> OwnerDataDictionary)
+    {
+        city.SetColor(OwnerDataDictionary[city.Owner]);
+    }
+
     //set flag to terminate coroutine when city is lost;
     private void SetGoldPerSecond(bool terminate = false)
     {
@@ -90,21 +96,16 @@ public class LevelController : MonoBehaviour
             }
         }
     }
-
-    private void SetCityColor(CityViewPresenter city, SerializedDictionary<OwnerType, OwnerData> OwnerDataDictionary)
-    {
-        city.SetColor(OwnerDataDictionary[city.Owner]);
-    }
-
-    private void OnCityTargetSet(AttackInfo data)
-    {
-        Debug.Log("Enemy city selected");
-        data.PlayerCity.SetTarget(data.EnemyCity);
-    }
-
     private void OwnerChanged(CityViewPresenter city, OwnerType newOwner)
     {
         city.Owner = newOwner;
         SetCityColor(city, ownerDataScriptableObject.OwnerDataDictionary);
     }
+    
+    private void OnCityTargetSet(AttackInfo data)
+    {
+        Debug.Log("Enemy city selected");
+        data.PlayerCity.SetTarget(data.EnemyCity);
+    }
 }
+
