@@ -14,8 +14,6 @@ using UnityEngine;
 public class LevelController : MonoBehaviour
 {
     [SerializeField] private CityOwnerChangedEventSO cityOwnerChangedEventSo;
-
-    [SerializeField] private CityOwnerChangedEventSO cityOwnerChangedEventSO;
     [SerializeField] private CitySetTargetEventSO citySetTargetEventSO;
 
     [SerializeField] private List<CityViewPresenter> CityList;

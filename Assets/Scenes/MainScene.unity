@@ -892,7 +892,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 368c96b4770522740b10be0aaa7c128f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cityCapturedEventSO: {fileID: 11400000, guid: 9ea61fa5bfcdf144ea1d505429369255, type: 2}
+  cityOwnerChangedEventSo: {fileID: 11400000, guid: 9ea61fa5bfcdf144ea1d505429369255, type: 2}
   citySetTargetEventSO: {fileID: 11400000, guid: 6e3714d0b19b38943be6d6eb8840686b, type: 2}
   CityList: []
   cityScriptableObject: {fileID: 11400000, guid: 2ffe755ddcce11140b568e0148e3bddd, type: 2}
