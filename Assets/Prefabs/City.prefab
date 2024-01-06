@@ -563,12 +563,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9522dcdab0a8d143ba5d9f690f062df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cityCapturedEvent: {fileID: 11400000, guid: 9ea61fa5bfcdf144ea1d505429369255, type: 2}
+  cityOwnerChangedEvent: {fileID: 11400000, guid: 9ea61fa5bfcdf144ea1d505429369255, type: 2}
   cityView: {fileID: 2729632593437281616}
   cityPinRenderer: {fileID: 0}
   regionRenderer: {fileID: 0}
   unitDB: {fileID: 11400000, guid: 256ce123a8e751f4a906b3460a217478, type: 2}
   owner: 4
+  IsMainPlayerCity: 0
   UnitTypeToSpawn: 1
 --- !u!114 &2729632593437281616
 MonoBehaviour:
