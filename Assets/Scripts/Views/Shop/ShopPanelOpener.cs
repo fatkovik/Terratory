@@ -4,10 +4,22 @@ using DG.Tweening;
 
 public class ShopPanelOpener : MonoBehaviour
 {
+    private int toggleButtonOpenPosition = -925;
+    private int layoutOpenPosition = -1200;
+
+    private int toggleButtonClosedPosition;
+    private int layoutClosedPosition;
+
     [SerializeField] private HorizontalLayoutGroup shopButtonsLayout;
     [SerializeField] private Button shopToggleButton;
 
     bool isOpen = false;
+
+    public void OnEnable()
+    {
+        this.toggleButtonClosedPosition = toggleButtonOpenPosition - 200;
+        this.layoutClosedPosition = layoutOpenPosition - 200;
+    }
 
     public void TogglePanel()
     {
@@ -26,8 +38,8 @@ public class ShopPanelOpener : MonoBehaviour
             return;
         }
 
-        shopButtonsLayout.transform.DOLocalMoveY(-1500, 0.5f);
-        shopToggleButton.transform.DOLocalMoveY(-1150, 0.5f);
+        shopButtonsLayout.transform.DOLocalMoveY(layoutClosedPosition, 0.5f);
+        shopToggleButton.transform.DOLocalMoveY(toggleButtonClosedPosition, 0.5f);
 
         this.isOpen = false;
     }
@@ -39,8 +51,8 @@ public class ShopPanelOpener : MonoBehaviour
             return;
         }
 
-        shopButtonsLayout.transform.DOLocalMoveY(-1200, 0.5f);
-        shopToggleButton.transform.DOLocalMoveY(-900, 0.5f);
+        shopButtonsLayout.transform.DOLocalMoveY(layoutOpenPosition, 0.5f);
+        shopToggleButton.transform.DOLocalMoveY(toggleButtonOpenPosition, 0.5f);
 
         this.isOpen = true;
     }
