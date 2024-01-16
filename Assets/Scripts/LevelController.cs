@@ -56,6 +56,7 @@ public class LevelController : MonoBehaviour
         this.playerCapitalCity = CityList.Find(x => x.IsCapital);
         this.totalGoldPerSecond = this.AllyCities.Sum(c => c.GoldPerSecond);
 
+        this.currencyScriptableObject.ChangePerSecondAmount(totalGoldPerSecond);
         SetGoldPerSecond();
     }
 
@@ -71,6 +72,7 @@ public class LevelController : MonoBehaviour
         {
             args.CapturedCity.CalculateAndSetGoldPerSecond(playerCapitalCity);
             this.totalGoldPerSecond += args.CapturedCity.GoldPerSecond;
+            this.currencyScriptableObject.ChangePerSecondAmount(totalGoldPerSecond);
         }
     }
 
@@ -90,7 +92,7 @@ public class LevelController : MonoBehaviour
             {
                 this.currencyScriptableObject.AddAmount(totalGoldPerSecond);
                 Debug.Log(totalGoldPerSecond);
-                yield return new WaitForSeconds(Constants.Constants.GoldStepInterval);
+                yield return new WaitForSeconds(Constants.Constants.CurrencyStepInterval);
             }
         }
     }

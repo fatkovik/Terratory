@@ -10,5 +10,5 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a8dc37d208a7a6e4985d0a9df154f1e2, type: 3}
-  m_Name: CityCapturedEvent
+  m_Name: CityOwnerChangedEvent
   m_EditorClassIdentifier: 
