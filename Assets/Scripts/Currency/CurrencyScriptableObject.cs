@@ -10,7 +10,16 @@ namespace Currency
 
         [field: SerializeField] public float CurrencyAmount { get; private set; }
 
+        [field: SerializeField] public float PerSecondAmount { get; private set; }
+
         public event Action<float> CurrencyAmountChanged;
+        public event Action<float> CurrencyPerSecondAmountChanged;
+
+        public void ChangePerSecondAmount(float amount)
+        {
+            this.PerSecondAmount = amount;
+            this.CurrencyPerSecondAmountChanged?.Invoke(this.PerSecondAmount);
+        }
 
         public void AddAmount(float amount)
         {

@@ -198,7 +198,7 @@ public class CityViewPresenter : MonoBehaviour, IDamagable, ISelectable
         var distance = Vector3.Distance(thisCityCoordinates, originalPlayerCityCoordinated);
 
         var normalisedDistance = Mathf.Clamp01(distance);
-        this.GoldPerSecond = baseGoldPerSecond * (normalisedDistance * GoldPerSecondDistanceModifier);
+        this.GoldPerSecond = baseGoldPerSecond * (normalisedDistance * CurrencyPerSecondDistanceModifier);
         Debug.Log(this.GoldPerSecond);
     }
 

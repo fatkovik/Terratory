@@ -152,6 +152,7 @@ namespace Scripts
             {
                 if (!attacking)
                 {
+                    spriteRenderer.color = Color.cyan;
                     moveCoroutine = StartCoroutine(MoveToTarget(targetCity.transform.position + Helpers.RandomVector(-2, 2)));
                 }
             };

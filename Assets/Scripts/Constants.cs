@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,8 +7,10 @@ namespace Constants
 {
     public static class Constants
     {
-        public const float GoldStepInterval = 1f;
-        public const float GoldPerSecondDistanceModifier = 10f;
+        public const float CurrencyStepInterval = 1f;
+        public const float CurrencyPerSecondDistanceModifier = 10f;
+
+        public const string BaseCurrencyText = "0";
     }
 
     public static class ExceptionMessages
