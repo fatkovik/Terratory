@@ -20,7 +20,7 @@ public class LevelController : MonoBehaviour
 
     [SerializeField] private CitySO cityScriptableObject;
     [SerializeField] private OwnerDataScriptableObject ownerDataScriptableObject;
-    private List<CityViewPresenter> AllyCities;
+    private static List<CityViewPresenter> AllyCities;
 
     [SerializeField] private CurrencyScriptableObject currencyScriptableObject;
 
@@ -47,16 +47,22 @@ public class LevelController : MonoBehaviour
         {
             var cityScript = city.GetComponent<CityViewPresenter>();
             cityScript.Init(cityScriptableObject);
+            cityScript.Rebelled += OnCityRebelled;
             CityList.Add(cityScript);
 
             SetCityColor(cityScript, ownerDataScriptableObject.OwnerDataDictionary);
         }
 
-        this.AllyCities = CityList.FindAll(x => x.Owner == OwnerType.Player);
+        AllyCities = CityList.FindAll(x => x.Owner == OwnerType.Player);
         this.playerCapitalCity = CityList.Find(x => x.IsCapital);
-        this.totalGoldPerSecond = this.AllyCities.Sum(c => c.GoldPerSecond);
+        this.totalGoldPerSecond = AllyCities.Sum(c => c.GoldPerSecond);
 
         SetGoldPerSecond();
+    }
+
+    private void OnCityRebelled(CityViewPresenter city)
+    {
+        OwnerChanged(city,OwnerType.Neutral);
     }
 
     private void OnCityOwnerChanged(CityOwnerChangedEventArgs args)
@@ -65,7 +71,7 @@ public class LevelController : MonoBehaviour
         OwnerChanged(args.CapturedCity, args.NewOwner);
         SetCityColor(args.CapturedCity, ownerDataScriptableObject.OwnerDataDictionary);
 
-        var isAdded = this.AllyCities.TryAddIfNotContains(args.CapturedCity);
+        var isAdded = AllyCities.TryAddIfNotContains(args.CapturedCity);
 
         if (isAdded)
         {
@@ -89,7 +95,6 @@ public class LevelController : MonoBehaviour
             while (!terminate)
             {
                 this.currencyScriptableObject.AddAmount(totalGoldPerSecond);
-                Debug.Log(totalGoldPerSecond);
                 yield return new WaitForSeconds(Constants.Constants.GoldStepInterval);
             }
         }
@@ -104,6 +109,32 @@ public class LevelController : MonoBehaviour
     {
         Debug.Log("Enemy city selected");
         data.PlayerCity.SetTarget(data.EnemyCity);
+    }
+
+    public static CityViewPresenter GetTheNearestAllyCity(CityViewPresenter city)
+    {
+        if (AllyCities == null || AllyCities.Count <= 1)
+        {
+            Debug.LogError("Positions list is empty or null!");
+            return null;
+        }
+
+        Vector3 cityPosition = city.transform.position;
+        CityViewPresenter nearestCity = AllyCities[0];
+        float minDistance = Vector3.Distance(cityPosition, nearestCity.transform.position);
+
+        foreach (var c in AllyCities)
+        {
+            if(city == c) continue;
+            float distance = Vector3.Distance(cityPosition, c.transform.position);
+            if (distance < minDistance)
+            {
+                minDistance = distance;
+                nearestCity = c;
+            }
+        }
+
+        return nearestCity;
     }
 }
 

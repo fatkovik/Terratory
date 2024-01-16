@@ -9,14 +9,18 @@ using Assets.Scripts.Cities;
 using Base.Input;
 using Assets.Scripts.EventSO;
 using System.Collections;
+using System.Linq;
 using Assets.Scripts;
 using Assets.Scripts.Owners;
 using Assets.Scripts.Units;
 using System.Net.Mime;
+using NaughtyAttributes;
+using Unity.VisualScripting;
 
 public class CityViewPresenter : MonoBehaviour, IDamagable, ISelectable
 {
     public event Action<UnitType, int> UnitAmountChanged;
+    public event Action<CityViewPresenter> Rebelled;
 
     [SerializeField] private CityOwnerChangedEventSO cityOwnerChangedEvent;
 
@@ -144,9 +148,10 @@ public class CityViewPresenter : MonoBehaviour, IDamagable, ISelectable
         this.units[unitToAdd]++;
 
         UnitAmountChanged?.Invoke(unitToAdd, this.units[unitToAdd]);
+        Debug.Log($"UNIT UPDATED COUNT{units[unitToAdd]}");
     }
 
-    public void CreateUnitObject(UnitType unitType, CityViewPresenter target)
+    public void CreateUnitObject(UnitType unitType, CityViewPresenter target, bool attackState = true)
     {
         if (this.units[unitType] < 1)
         {
@@ -159,6 +164,7 @@ public class CityViewPresenter : MonoBehaviour, IDamagable, ISelectable
 
         var newUnit = this.unitFactory.CreateUnit(unitType, this.owner, this.transform.position);
         newUnit.transform.position += Helpers.RandomVector(-0.5f, 0.5f);
+        newUnit.SetAttackState(attackState);
         newUnit.Init(target);
     }
 
@@ -210,9 +216,20 @@ public class CityViewPresenter : MonoBehaviour, IDamagable, ISelectable
         }
     }
     
+    [Button]
     private void Rebel()
     {
-        Debug.LogError("Rebel logic is not implemented");
+        // Sending half of units to nearest city and eliminating the rest
+        var keys = units.Keys.ToList();
+        foreach (var t in keys)
+        {
+            for (int j = 0; j < units[t]/2; j++)
+            {
+                CreateUnitObject(t, LevelController.GetTheNearestAllyCity(this));
+            }
+            units[t] = 0;
+        }
+        Rebelled?.Invoke(this);
     }
 
     private void Awake()

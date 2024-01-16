@@ -74,6 +74,11 @@ namespace Scripts
             }
         }
 
+        public void SetAttackState(bool state)
+        {
+            attackRangeColliderScript.gameObject.SetActive(state);
+        }
+
         private IEnumerator MoveToTarget(Vector2 target)
         {
             while (true)
@@ -101,15 +106,22 @@ namespace Scripts
         {
             if (collision.gameObject.CompareTag("City"))
             {
+                Debug.Log("CITY");
                 var city = collision.gameObject.GetComponent<CityViewPresenter>();
-                if (city.Owner == targetCity.Owner)
+                if (city.Owner == targetCity.Owner && owner != targetCity.Owner)
                 {
                     this.AttackTarget(city, this.owner, this.damage);
+                }
+                else if(city == targetCity && owner == targetCity.Owner)
+                {
+                    city.AddUnits(type);
+                    Destroy(gameObject);
                 }
             }
             
             if (collision.gameObject.CompareTag("Unit"))
             {
+                Debug.Log("UNIT");
                 var unit = collision.gameObject.GetComponent<Unit>();
                 if (unit.owner != this.owner)
                 {
@@ -148,6 +160,7 @@ namespace Scripts
             {
                 while (damageReciever.HasHealth)
                 {
+                    Debug.Log("ATTACK");
                     damageReciever.TakeDamage(owner, damage);
                     Debug.Log($"Damage given: {damage}, To {owner}");
                     yield return new WaitForSeconds(attackSpeed);
@@ -164,8 +177,10 @@ namespace Scripts
 
         public void Init(CityViewPresenter target)
         {
-            var targetRandmizedPosition = target.transform.position + Helpers.RandomVector(-5, 5);
-            moveCoroutine = StartCoroutine(MoveToTarget(targetRandmizedPosition));
+            Debug.Log(target);
+            // var targetRandmizedPosition = target.transform.position + Helpers.RandomVector(-5, 5);
+            // moveCoroutine = StartCoroutine(MoveToTarget(targetRandmizedPosition));
+            moveCoroutine = StartCoroutine(MoveToTarget(target.transform.position));
             this.targetCity = target;
         }
 

@@ -11,7 +11,6 @@ public class AttackRangeCollider : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         ColliderEnter?.Invoke(other);
-        Debug.Log("Collision");
     }
 }
     
