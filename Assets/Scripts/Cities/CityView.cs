@@ -52,18 +52,10 @@ namespace Assets.Scripts.Cities
         /// <param name="hide"></param>
         public void ShowCountOverlay(bool hide)
         {
-            if (this.infantryCount.gameObject.activeInHierarchy == hide && 
-                this.tankCount.gameObject.activeInHierarchy == hide && 
-                this.artilleryCount.gameObject.activeInHierarchy == hide &&
-                this.strength.gameObject.activeInHierarchy == hide)
-            {
-                return;
-            }
-
-            this.infantryCount.gameObject.SetActive(false);
-            this.tankCount.gameObject.SetActive(false);
-            this.artilleryCount.gameObject.SetActive(false);
-            this.strength.gameObject.SetActive(false);
+            this.infantryCount.gameObject.SetActive(hide);
+            this.tankCount.gameObject.SetActive(hide);
+            this.artilleryCount.gameObject.SetActive(hide);
+            this.strength.gameObject.SetActive(hide);
         }
     }
 }

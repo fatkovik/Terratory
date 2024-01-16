@@ -26,6 +26,7 @@ public class MainViewPresenter : MonoBehaviour
     {
         mainView.Initilize(amount.ToString());
     }
+
     private void CurrencyPerSecondChangedHandler(float amount)
     {
         mainView.SetCurrencyPerSecond($"+{amount}");
