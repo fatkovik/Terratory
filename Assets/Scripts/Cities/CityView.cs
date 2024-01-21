@@ -16,6 +16,7 @@ namespace Assets.Scripts.Cities
         [SerializeField] private TMP_Text artilleryCount;
         [SerializeField] private TMP_Text currentHealth;
         [SerializeField] private TMP_Text strength;
+        [SerializeField] private TMP_Text cityName;
 
         //TODO: change after testing... if it must be preserved use dictionary 
         public void SetUnitOverlay(UnitType type, int count)
@@ -38,12 +39,17 @@ namespace Assets.Scripts.Cities
 
         public void SetHealthOverlay(int health)
         {
-            this.currentHealth.SetText($"Health: {health}");   
+            this.currentHealth.SetText(health.ToString());   
         }
 
         public void SetStrengthOverlay(float strength)
         {
-            this.strength.SetText($"Strength: {strength}");
+            this.strength.SetText(strength.ToString());
+        }
+
+        public void SetCityName(string name)
+        {
+            this.cityName.SetText(name);
         }
 
         /// <summary>

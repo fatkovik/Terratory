@@ -22,6 +22,9 @@ public class CityViewPresenter : MonoBehaviour, IDamagable, ISelectable
     public event Action<UnitType, int> UnitAmountChanged;
     public event Action<CityViewPresenter> Rebelled;
 
+    [BoxGroup("City Name")]
+    [SerializeField] private string cityName;
+
     [SerializeField] private CityOwnerChangedEventSO cityOwnerChangedEvent;
 
     [SerializeField] private CityView cityView;
@@ -184,6 +187,7 @@ public class CityViewPresenter : MonoBehaviour, IDamagable, ISelectable
         this.units = new Dictionary<UnitType, int>();
         this.RegenHealth();
 
+        this.cityView.SetCityName(this.cityName);
         this.cityView.ShowCountOverlay(this.Owner == OwnerType.Player);
         //TODO: do the calculations
 

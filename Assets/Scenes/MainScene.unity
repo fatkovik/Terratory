@@ -160,6 +160,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2340090764285421721, guid: e7f32af568be7a8489f4a267e727deac, type: 3}
+      propertyPath: cityName
+      value: Klris
+      objectReference: {fileID: 0}
+    - target: {fileID: 2340090764285421721, guid: e7f32af568be7a8489f4a267e727deac, type: 3}
       propertyPath: regionRenderer
       value: 
       objectReference: {fileID: 628830266}
@@ -408,6 +412,10 @@ PrefabInstance:
     - target: {fileID: 2340090764285421721, guid: e7f32af568be7a8489f4a267e727deac, type: 3}
       propertyPath: owner
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2340090764285421721, guid: e7f32af568be7a8489f4a267e727deac, type: 3}
+      propertyPath: cityName
+      value: Jaj
       objectReference: {fileID: 0}
     - target: {fileID: 2340090764285421721, guid: e7f32af568be7a8489f4a267e727deac, type: 3}
       propertyPath: regionRenderer
@@ -1505,6 +1513,10 @@ PrefabInstance:
     - target: {fileID: 2232326777991967790, guid: e7f32af568be7a8489f4a267e727deac, type: 3}
       propertyPath: m_Layer
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2340090764285421721, guid: e7f32af568be7a8489f4a267e727deac, type: 3}
+      propertyPath: cityName
+      value: Jeb
       objectReference: {fileID: 0}
     - target: {fileID: 2340090764285421721, guid: e7f32af568be7a8489f4a267e727deac, type: 3}
       propertyPath: regionRenderer
