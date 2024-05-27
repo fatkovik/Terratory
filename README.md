@@ -1,2 +1,2 @@
 # TerraTory
-A Work in Proggress Strategy game made with Unity.
+A Work in Progress Strategy game made with Unity.
